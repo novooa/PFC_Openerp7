@@ -1,0 +1,686 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+  <data>
+    <menuitem name="Empleo" id="empleo_menu" sequence="90"/>
+    <menuitem name="Información" id="informacion_menu_general" parent="empleo_menu"/>
+    <menuitem name="Empresas" id="empresas_menu_general" parent="empleo_menu"/>
+    <menuitem name="Másters" id="masters_menu_general" parent="empleo_menu"/>
+
+    <record model="ir.ui.view" id="custom_paginas_kanban_view">
+            <field name="name">empleo.paginas.kanban</field>
+            <field name="model">empleo.paginas</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--list of field to be loaded -->
+                    <field name="name" />
+                    <field name="image" />
+                    <templates>
+                    <t t-name="kanban-box">
+                            <div class="oe_product_vignette">
+                                <a type="open">
+                                    <img class="oe_kanban_image"
+                                        t-att-src="kanban_image('empleo.paginas', 'image', record.id.value)" />
+                                </a>
+                                <div class="oe_product_desc">
+                                    <h4>
+                                        <a type="edit">
+                                            <field name="name"></field>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li><field name="usuario"></field> </li>
+                                        <li><field name="contrasena"></field>  </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+    </record>
+    <record model="ir.ui.view" id="empleo_paginas_tree">
+      <field name="name">empleo.paginas.tree</field>
+      <field name="model">empleo.paginas</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="paginas">
+          <field name="name"/>
+          <field name="usuario"/>
+          <field name="contrasena"/>
+          <field name="web"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="empleo_paginas_form">
+      <field name="name">empleo.paginas.form</field>
+      <field name="model">empleo.paginas</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="paginas">
+          <group string="Páginas de búsqueda de empleo">
+            <field name="image" widget='image' />
+            <field name="name"/>
+            <field name="web"/>
+          </group>
+          <group>
+            <field name="usuario"/>
+            <field name="contrasena"/>
+          </group>
+        <newline/>
+          <group colspan="2" col="1">
+          <field name="boletin_id"/>
+          </group>
+        <newline/>
+          <group colspan="2" col="1">
+          <field name="notas" placeholder= "anotaciones,más información,etc..."/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="empleo_paginas_action" model="ir.actions.act_window">
+      <field name="name">Paginas</field>
+      <field name="res_model">empleo.paginas</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem action="empleo_paginas_action" id="empleo_paginas_menu" sequence="1" parent="informacion_menu_general"/>
+
+    <record model="ir.ui.view" id="empleo_boletin_tree">
+      <field name="name">empleo.boletin.tree</field>
+      <field name="model">empleo.boletin</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="boletin">
+          <field name="fecha"/>
+          <field name="archivo"/>
+          <field name="abrir"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="empleo_boletin_form">
+      <field name="name">empleo.boletin.form</field>
+      <field name="model">empleo.boletin</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="boletin">
+          <field name="fecha"/>
+          <field name="archivo"/>
+          <field name="abrir"/>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="custom_becas_kanban_view">
+            <field name="name">empleo.becas.kanban</field>
+            <field name="model">empleo.becas</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--list of field to be loaded -->
+                    <field name="name" />
+                    <field name="image" />
+                    <templates>
+                    <t t-name="kanban-box">
+                            <div class="oe_product_vignette">
+                                <a type="open">
+                                    <img class="oe_kanban_image"
+                                        t-att-src="kanban_image('empleo.becas', 'image', record.id.value)" />
+                                </a>
+                                <div class="oe_product_desc">
+                                    <h4>
+                                        <a type="edit">
+                                            <field name="name"></field>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li><field name="institucion"></field> </li>
+                                        <li><field name="fecha"></field>  </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+    </record>
+    <record model="ir.ui.view" id="empleo_becas_tree">
+      <field name="name">empleo.becas.tree</field>
+      <field name="model">empleo.becas</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="becas">
+          <field name="name"/>
+          <field name="institucion"/>
+          <field name="web"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="empleo_becas_form">
+      <field name="name">empleo.becas.form</field>
+      <field name="model">empleo.becas</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="becas">
+          <group string="Becas">
+            <field name="image" widget='image' />
+            <field name="name"/>
+            <field name="institucion"/>
+            <field name="fecha"/>
+            <field name="ficha"/>
+            <field name="abrir"/>
+          </group>
+          <group>
+            <field name="pagalaempresa"/>
+            <field name="pagalabeca"/>
+            <field name="cuantia"/>
+            <field name="web"/>
+            <field name="contacto"/>
+          </group>
+          <newline/>
+            <notebook colspan="2">
+              <page string="Información">
+                <group colspan="2" col="1">
+                  <field name="informacion" placeholder= "Información general..."/>
+                </group>
+              </page>
+              <page string="Notas">
+                <group colspan="2" col="1">
+                  <field name="notas" placeholder= "inscripciones,plazos..."/>
+                </group>
+              </page>
+            </notebook>
+        </form>
+      </field>
+    </record>
+
+    <record id="empleo_becas_action" model="ir.actions.act_window">
+      <field name="name">Becas</field>
+      <field name="res_model">empleo.becas</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem action="empleo_becas_action" id="empleo_becas_menu" sequence="2" parent="informacion_menu_general"/>
+
+    <record model="ir.ui.view" id="custom_multinacionales_kanban_view">
+            <field name="name">empleo.multinacionales.kanban</field>
+            <field name="model">empleo.multinacionales</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--list of field to be loaded -->
+                    <field name="name" />
+                    <field name="image" />
+                    <templates>
+                    <t t-name="kanban-box">
+                            <div class="oe_product_vignette">
+                                <a type="open">
+                                    <img class="oe_kanban_image"
+                                        t-att-src="kanban_image('empleo.multinacionales','image', record.id.value)" />
+                                </a>
+                                <div class="oe_product_desc">
+                                    <h4>
+                                        <a type="edit">
+                                            <field name="name"></field>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li><field name="web"></field> </li>
+                                        <li><field name="contacto"></field>  </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+    </record>
+    <record model="ir.ui.view" id="empleo_multinacionales_tree">
+      <field name="name">empleo.multinacionales.tree</field>
+      <field name="model">empleo.multinacionales</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="multinacionales">
+          <field name="name"/>
+          <field name="lugar"/>
+          <field name="web"/>
+          <field name="contacto"/>
+          <field name="formulario"/>
+          <field name="enviadoonline"/>
+          <field name="enviadomail"/>
+          <field name="enviadopersona"/>
+          <field name="enviadoporalguien"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="empleo_multinacionales_form">
+      <field name="name">empleo.multinacionales.form</field>
+      <field name="model">empleo.multinacionales</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="multinacionales">
+          <group string="Multinacionales">
+            <field name="image" widget='image' />
+            <field name="name"/>
+            <field name="ambito"/>
+            <field name="lugar"/>
+            <field name="direccion"/>
+            <field name="web"/>
+            <field name="contacto"/>
+          </group>
+          <group>
+          <field name="formulario"/>
+          <field name="enviadoonline"/>
+          <field name="enviadomail"/>
+          <field name="enviadopersona"/>
+          <field name="enviadoporalguien"/>
+          <field name="entrevista"/>
+          <field name="fecha"/>
+          </group>
+          <newline/>
+            <notebook colspan="4">
+              <page string="Información">
+                <group colspan="2" col="1">
+                  <field name="informacion" placeholder= "Información general..."/>
+                </group>
+              </page>
+              <page string="Carta de presentación">
+                <group colspan="2" col="1">
+                  <field name="cartapresentacion"/>
+                </group>
+              </page>
+              <page string="Respuestas">
+                <group colspan="2" col="1">
+                  <field name="respuestas"/>
+                </group>
+              </page>
+              <page string="Notas">
+                <group colspan="2" col="1">
+                  <field name="notas" placeholder= "inscripciones,plazos..."/>
+                </group>
+              </page>
+            </notebook>
+        </form>
+      </field>
+    </record>
+
+    <record id="empleo_multinacionales_action" model="ir.actions.act_window">
+      <field name="name">Multinacionales</field>
+      <field name="res_model">empleo.multinacionales</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem action="empleo_multinacionales_action" id="empleo_multinacionales_menu" sequence="3" parent="empresas_menu_general"/>
+
+    <record model="ir.ui.view" id="empleo_mineria_tree">
+      <field name="name">empleo.mineria.tree</field>
+      <field name="model">empleo.mineria</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="mineria">
+          <field name="nombre"/>
+          <field name="lugar"/>
+          <field name="web"/>
+          <field name="contacto"/>
+          <field name="formulario"/>
+          <field name="enviadoonline"/>
+          <field name="enviadomail"/>
+          <field name="enviadopersona"/>
+          <field name="enviadoporalguien"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="empleo_mineria_form">
+      <field name="name">empleo.mineria.form</field>
+      <field name="model">empleo.mineria</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="mineria">
+          <group string="Empresas mineras o de medio ambiente">
+            <field name="nombre"/>
+            <field name="ambito"/>
+            <field name="lugar"/>
+            <field name="direccion"/>
+            <field name="web"/>
+            <field name="contacto"/>
+          </group>
+          <group>
+          <field name="formulario"/>
+          <field name="enviadoonline"/>
+          <field name="enviadomail"/>
+          <field name="enviadopersona"/>
+          <field name="enviadoporalguien"/>
+          <field name="entrevista"/>
+          <field name="fecha"/>
+          </group>
+          <newline/>
+            <notebook colspan="4">
+              <page string="Información">
+                <group colspan="2" col="1">
+                  <field name="informacion" placeholder= "Información general..."/>
+                </group>
+              </page>
+              <page string="Carta de presentación">
+                <group colspan="2" col="1">
+                  <field name="cartapresentacion"/>
+                </group>
+              </page>
+              <page string="Respuestas">
+                <group colspan="2" col="1">
+                  <field name="respuestas"/>
+                </group>
+              </page>
+              <page string="Notas">
+                <group colspan="2" col="1">
+                  <field name="notas" />
+                </group>
+              </page>
+            </notebook>
+        </form>
+      </field>
+    </record>
+
+    <record id="empleo_mineria_action" model="ir.actions.act_window">
+      <field name="name">Mineria</field>
+      <field name="res_model">empleo.mineria</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="empleo_mineria_action" id="empleo_mineria_menu" sequence="4" parent="empresas_menu_general"/>
+
+    <record model="ir.ui.view" id="custom_erp_kanban_view">
+            <field name="name">empleo.erp.kanban</field>
+            <field name="model">empleo.erp</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--list of field to be loaded -->
+                    <field name="name" />
+                    <field name="image" />
+                    <templates>
+                    <t t-name="kanban-box">
+                            <div class="oe_product_vignette">
+                                <a type="open">
+                                    <img class="oe_kanban_image"
+                                        t-att-src="kanban_image('empleo.erp','image', record.id.value)" />
+                                </a>
+                                <div class="oe_product_desc">
+                                    <h4>
+                                        <a type="edit">
+                                            <field name="name"></field>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li><field name="web"></field> </li>
+                                        <li><field name="contacto"></field>  </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+    </record>
+    <record model="ir.ui.view" id="empleo_erp_tree">
+      <field name="name">empleo.erp.tree</field>
+      <field name="model">empleo.erp</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="erp">
+          <field name="name"/>
+          <field name="lugar"/>
+          <field name="web"/>
+          <field name="contacto"/>
+          <field name="formulario"/>
+          <field name="enviadoonline"/>
+          <field name="enviadomail"/>
+          <field name="enviadopersona"/>
+          <field name="enviadoporalguien"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="empleo_erp_form">
+      <field name="name">empleo.erp.form</field>
+      <field name="model">empleo.erp</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="erp">
+          <group string="Consultoras ERP">
+            <field name="image" widget='image' />
+            <field name="name"/>
+            <field name="erp"/>
+            <field name="lugar"/>
+            <field name="direccion"/>
+            <field name="web"/>
+            <field name="contacto"/>
+          </group>
+          <group>
+          <field name="formulario"/>
+          <field name="enviadoonline"/>
+          <field name="enviadomail"/>
+          <field name="enviadopersona"/>
+          <field name="enviadoporalguien"/>
+          <field name="entrevista"/>
+          <field name="fecha"/>
+          </group>
+          <newline/>
+            <notebook colspan="4">
+              <page string="Información">
+                <group colspan="2" col="1">
+                  <field name="informacion" placeholder= "Información general..."/>
+                </group>
+              </page>
+              <page string="Carta de presentación">
+                <group colspan="2" col="1">
+                  <field name="cartapresentacion"/>
+                </group>
+              </page>
+              <page string="Respuestas">
+                <group colspan="2" col="1">
+                  <field name="respuestas"/>
+                </group>
+              </page>
+              <page string="Notas">
+                <group colspan="2" col="1">
+                  <field name="notas"/>
+                </group>
+              </page>
+            </notebook>
+        </form>
+      </field>
+    </record>
+
+    <record id="empleo_erp_action" model="ir.actions.act_window">
+      <field name="name">ERP</field>
+      <field name="res_model">empleo.erp</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem action="empleo_erp_action" id="empleo_erp_menu" sequence="5" parent="empresas_menu_general"/>
+
+    <record model="ir.ui.view" id="empleo_otras_tree">
+      <field name="name">empleo.otras.tree</field>
+      <field name="model">empleo.otras</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="otras">
+          <field name="nombre"/>
+          <field name="lugar"/>
+          <field name="web"/>
+          <field name="contacto"/>
+          <field name="formulario"/>
+          <field name="enviadoonline"/>
+          <field name="enviadomail"/>
+          <field name="enviadopersona"/>
+          <field name="enviadoporalguien"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="empleo_otras_form">
+      <field name="name">empleo.otras.form</field>
+      <field name="model">empleo.otras</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="otras">
+          <group>
+            <field name="nombre"/>
+            <field name="ambito"/>
+            <field name="lugar"/>
+            <field name="direccion"/>
+            <field name="web"/>
+            <field name="contacto"/>
+          </group>
+          <group>
+          <field name="formulario"/>
+          <field name="enviadoonline"/>
+          <field name="enviadomail"/>
+          <field name="enviadopersona"/>
+          <field name="enviadoporalguien"/>
+          <field name="entrevista"/>
+          <field name="fecha"/>
+          </group>
+          <newline/>
+            <notebook colspan="4">
+              <page string="Información">
+                <group colspan="2" col="1">
+                  <field name="informacion" placeholder= "Información general..."/>
+                </group>
+              </page>
+              <page string="Carta de presentación">
+                <group colspan="2" col="1">
+                  <field name="cartapresentacion"/>
+                </group>
+              </page>
+              <page string="Respuestas">
+                <group colspan="2" col="1">
+                  <field name="respuestas"/>
+                </group>
+              </page>
+              <page string="Notas">
+                <group colspan="2" col="1">
+                  <field name="notas" />
+                </group>
+              </page>
+            </notebook>
+        </form>
+      </field>
+    </record>
+
+    <record id="empleo_otras_action" model="ir.actions.act_window">
+      <field name="name">Otras</field>
+      <field name="res_model">empleo.otras</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="empleo_otras_action" id="empleo_otras_menu" sequence="6" parent="empresas_menu_general"/>
+
+    <record model="ir.ui.view" id="custom_masters_kanban_view">
+            <field name="name">empleo.masters.kanban</field>
+            <field name="model">empleo.masters</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--list of field to be loaded -->
+                    <field name="name" />
+                    <field name="image" />
+                    <templates>
+                    <t t-name="kanban-box">
+                            <div class="oe_product_vignette">
+                                <a type="open">
+                                    <img class="oe_kanban_image"
+                                        t-att-src="kanban_image('empleo.masters', 'image', record.id.value)" />
+                                </a>
+                                <div class="oe_product_desc">
+                                    <h4>
+                                        <a type="edit">
+                                            <field name="name"></field>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li><field name="universidad"></field> </li>
+                                        <li><field name="modalidad"></field>  </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+    </record>
+
+    <record model="ir.ui.view" id="empleo_masters_tree">
+      <field name="name">empleo.masters.tree</field>
+      <field name="model">empleo.masters</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="masters">
+          <field name="name"/>
+          <field name="universidad"/>
+          <field name="modalidad"/>
+          <field name="web"/>
+          <field name="contacto"/>
+          <field name="fechainicio"/>
+          <field name="fechafin"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="empleo_masters_form">
+      <field name="name">empleo.masters.form</field>
+      <field name="model">empleo.masters</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="masters">
+          <group string="Máster">
+            <field name="image" widget='image' />
+            <field name="name"/>
+            <field name="universidad"/>
+            <field name="modalidad"/>
+            <field name="web"/>
+            <field name="contacto"/>
+          </group>
+          <group>
+            <field name="fechainicio"/>
+            <field name="fechafin"/>
+          </group>
+          <newline/>
+            <notebook colspan="2">
+              <page string="Información">
+                <group colspan="2" col="1">
+                  <field name="informacion" placeholder= "Información general..."/>
+                </group>
+              </page>
+              <page string="Notas">
+                <group colspan="2" col="1">
+                  <field name="notas" placeholder= "inscripciones,plazos..."/>
+                </group>
+              </page>
+            </notebook>
+        </form>
+      </field>
+    </record>
+
+    <record id="empleo_masters_action" model="ir.actions.act_window">
+      <field name="name">Masters</field>
+      <field name="res_model">empleo.masters</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem action="empleo_masters_action" id="empleo_masters_menu" sequence="7" parent="masters_menu_general"/>
+  </data>
+</openerp>

@@ -1,0 +1,1120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+  <data>
+    <menuitem name="Congreso" id="congreso" sequence="90"/>
+    <menuitem name="Ficha técnica" id="congreso_fichatecnica" parent="congreso"/>
+    <menuitem name="Organización" id="congreso_organizacion" parent="congreso"/>
+    <menuitem name="Ponencias" id="congreso_ponencias" parent="congreso"/>
+    <menuitem name="Participantes" id="congreso_participantes" parent="congreso"/>
+    <menuitem name="Comunicación y promoción" id="congreso_comunicacion" parent="congreso"/>
+
+    <record model="ir.ui.view" id="congreso_ficha_tree">
+      <field name="name">congreso.ficha.tree</field>
+      <field name="model">congreso.ficha</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="ficha">
+          <field name="nombre"/>
+          <field name="subtitulo"/>
+          <field name="fechauno"/>
+          <field name="fechados"/>
+          <field name="sede"/>
+          <field name="secretariatecnica"/>
+          <field name="ficha" widget='url'/>
+          <field name="abrir"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="congreso_ficha_form">
+      <field name="name">congreso.ficha.form</field>
+      <field name="model">congreso.ficha</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="ficha">
+          <group string="Ficha técnica">
+          <field name="image" widget='image' />
+          <field name="nombre"/>
+          <field name="subtitulo"/>
+          <field name="sede"/>
+          <field name="secretariatecnica"/>
+          <field name="ficha" />
+          <field name="abrir" placeholder= "indicar pdf,word..."/>
+          </group>
+          <group string="Fecha">
+          <field name="fechauno"/>
+          <field name="fechados"/>
+          </group>
+        <separator string="Información general" colspan="4"/>
+            <notebook colspan="8">
+              <page string="Presentación">
+                <group colspan="2" col="1">
+                  <field name="presentacion" placeholder= "Presentación, organizadores, participantes..."/>
+                </group>
+              </page>
+              <page string="Objetivos">
+                <group colspan="2" col="1">
+                  <field name="objetivos" placeholder= "Difusión,experiencias,conocimientos, resultados..."/>
+                </group>
+              </page>
+              <page string="Comités">
+                <group colspan="2" col="1">
+                  <field name="comites" placeholder="Comité organizador,comité tecnico..."/>
+                </group>
+              </page>
+              <page string="Inscripciones">
+                <group colspan="2" col="1">
+                  <field name="inscripciones" placeholder="Lugar, precio,descuentos..."/>
+                </group>
+              </page>
+              <page string="Créditos universitarios">
+                <group colspan="2" col="1">
+                  <field name="creditos" placeholder="Creditos de libre eleccion, ECTS..."/>
+                </group>
+              </page>
+              <page string="Exposición">
+                <group colspan="2" col="1">
+                  <field name="exposicion" placeholder="Información general, sede, zonas de exhibiciones..."/>
+                </group>
+              </page>
+              <page string="Patrocinadores">
+                <group colspan="2" col="1">
+                  <field name="patrocinadores" placeholder="Patrocinadores, colaboradores..."/>
+                </group>
+              </page>
+              <page string="Programa">
+                <group colspan="2" col="1">
+                  <field name="programa" placeholder="Programa del congreso..."/>
+                </group>
+              </page>
+              <page string="Observaciones">
+                <group colspan="2" col="1">
+                  <field name="observaciones" placeholder="Información general, sede, zonas de exhibiciones..."/>
+                </group>
+              </page>
+            </notebook>
+        </form>
+      </field>
+    </record>
+
+    <record id="congreso_ficha_action" model="ir.actions.act_window">
+      <field name="name">Ficha</field>
+      <field name="res_model">congreso.ficha</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="congreso_ficha_action" id="congreso_ficha_menu" sequence="1" parent="congreso_fichatecnica"/>
+
+    <record model="ir.ui.view" id="congreso_programa_tree">
+      <field name="name">congreso.programa.tree</field>
+      <field name="model">congreso.programa</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="programa">
+          <field name="desde"/>
+          <field name="hasta"/>
+          <field name="actividad"/>
+          <field name="ponente"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="congreso_programa_form">
+      <field name="name">congreso.programa.form</field>
+      <field name="model">congreso.programa</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="programa">
+          <field name="desde" widget="float_time"/>
+          <field name="hasta" widget="float_time"/>
+          <field name="actividad"/>
+          <field name="ponente"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="congreso_programa_action" model="ir.actions.act_window">
+      <field name="name">Programa</field>
+      <field name="res_model">congreso.programa</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="congreso_programa_action" id="congreso_programa_menu" sequence="2" parent="congreso_fichatecnica"/>
+
+    <record model="ir.ui.view" id="custom_organizadores_kanban_view">
+            <field name="name">congreso.organizadores.kanban</field>
+            <field name="model">congreso.organizadores</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--list of field to be loaded -->
+                    <field name="nombre" />
+                    <field name="image" />
+                    <templates>
+                    <t t-name="kanban-box">
+                            <div class="oe_product_vignette">
+                                <a type="open">
+                                    <img class="oe_kanban_image"
+                                        t-att-src="kanban_image('congreso.organizadores', 'image', record.id.value)" />
+                                </a>
+                                <div class="oe_product_desc">
+                                    <h4>
+                                        <a type="edit">
+                                            <field name="nombre"></field>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li><field name="contacto"></field> </li>
+                                        <li><field name="web"></field>  </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+    </record>
+    <record model="ir.ui.view" id="congreso_organizadores_tree">
+      <field name="name">congreso.organizadores.tree</field>
+      <field name="model">congreso.organizadores</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="organizadores">
+          <field name="nombre"/>
+          <field name="contacto"/>
+          <field name="direccion"/>
+          <field name="cif"/>
+          <field name="telefono"/>
+          <field name="email"/>
+          <field name="web"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="congreso_organizadores_form">
+      <field name="name">congreso.organizadores.form</field>
+      <field name="model">congreso.organizadores</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="organizadores">
+          <group>
+            <field name="image" widget='image' />
+            <field name="nombre"/>
+            <field name="contacto"/>
+            <field name="email"/>
+          </group>
+          <group>
+            <field name="direccion"/>
+            <field name="cif"/>
+            <field name="telefono"/>
+            <field name="web"/>
+          </group>
+          <newline/>
+          <group colspan="2" col="1">
+            <field name="informacion" placeholder= "información adicional..."/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="congreso_organizadores_action" model="ir.actions.act_window">
+      <field name="name">Organizadores</field>
+      <field name="res_model">congreso.organizadores</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem action="congreso_organizadores_action" id="congreso_organizadores_menu" sequence="3" parent="congreso_organizacion"/>
+
+    <record model="ir.ui.view" id="custom_entidadescolaboradoras_kanban_view">
+            <field name="name">congreso.entidadescolaboradoras.kanban</field>
+            <field name="model">congreso.entidadescolaboradoras</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--list of field to be loaded -->
+                    <field name="nombre" />
+                    <field name="image" />
+                    <templates>
+                    <t t-name="kanban-box">
+                            <div class="oe_product_vignette">
+                                <a type="open">
+                                    <img class="oe_kanban_image"
+                                        t-att-src="kanban_image('congreso.entidadescolaboradoras', 'image', record.id.value)" />
+                                </a>
+                                <div class="oe_product_desc">
+                                    <h4>
+                                        <a type="edit">
+                                            <field name="nombre"></field>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li><field name="contacto"></field> </li>
+                                        <li><field name="web"></field>  </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+    </record>
+    <record model="ir.ui.view" id="congreso_entidadescolaboradoras_tree">
+      <field name="name">congreso.entidadescolaboradoras.tree</field>
+      <field name="model">congreso.entidadescolaboradoras</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="entidadescolaboradoras">
+          <field name="nombre"/>
+          <field name="contacto"/>
+          <field name="direccion"/>
+          <field name="cif"/>
+          <field name="telefono"/>
+          <field name="email"/>
+          <field name="web"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="congreso_entidadescolaboradoras_form">
+      <field name="name">congreso.entidadescolaboradoras.form</field>
+      <field name="model">congreso.entidadescolaboradoras</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="entidadescolaboradoras">
+          <group>
+            <field name="image" widget='image' />
+            <field name="nombre"/>
+            <field name="contacto"/>
+            <field name="email"/>
+          </group>
+          <group>
+            <field name="direccion"/>
+            <field name="cif"/>
+            <field name="telefono"/>
+            <field name="web"/>
+          </group>
+          <newline/>
+          <group colspan="2" col="1">
+            <field name="informacion" placeholder= "información adicional..."/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="congreso_entidadescolaboradoras_action" model="ir.actions.act_window">
+      <field name="name">Entidades colaboradoras</field>
+      <field name="res_model">congreso.entidadescolaboradoras</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem action="congreso_entidadescolaboradoras_action" id="congreso_entidadescolaboradoras_menu" sequence="4" parent="congreso_organizacion"/>
+
+    <record model="ir.ui.view" id="custom_patrocinadores_kanban_view">
+            <field name="name">congreso.patrocinadores.kanban</field>
+            <field name="model">congreso.patrocinadores</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--list of field to be loaded -->
+                    <field name="nombre" />
+                    <field name="image" />
+                    <templates>
+                    <t t-name="kanban-box">
+                            <div class="oe_product_vignette">
+                                <a type="open">
+                                    <img class="oe_kanban_image"
+                                        t-att-src="kanban_image('congreso.patrocinadores', 'image', record.id.value)" />
+                                </a>
+                                <div class="oe_product_desc">
+                                    <h4>
+                                        <a type="edit">
+                                            <field name="nombre"></field>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li><field name="contacto"></field> </li>
+                                        <li><field name="web"></field>  </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+    </record>
+    <record model="ir.ui.view" id="congreso_patrocinadores_tree">
+      <field name="name">congreso.patrocinadores.tree</field>
+      <field name="model">congreso.patrocinadores</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="patrocinadores">
+          <field name="nombre"/>
+          <field name="contacto"/>
+          <field name="direccion"/>
+          <field name="cif"/>
+          <field name="telefono"/>
+          <field name="email"/>
+          <field name="web"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="congreso_patrocinadores_form">
+      <field name="name">congreso.patrocinadores.form</field>
+      <field name="model">congreso.patrocinadores</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="patrocinadores">
+          <group>
+            <field name="image" widget='image' />
+            <field name="nombre"/>
+            <field name="contacto"/>
+            <field name="email"/>
+          </group>
+          <group>
+            <field name="direccion"/>
+            <field name="cif"/>
+            <field name="telefono"/>
+            <field name="web"/>
+          </group>
+          <newline/>
+          <group colspan="2" col="1">
+            <field name="informacion" placeholder= "información adicional..."/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="congreso_patrocinadores_action" model="ir.actions.act_window">
+      <field name="name">Patrocinadores</field>
+      <field name="res_model">congreso.patrocinadores</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem action="congreso_patrocinadores_action" id="congreso_patrocinadores_menu" sequence="5" parent="congreso_organizacion"/>
+
+
+    <record model="ir.ui.view" id="custom_presentador_kanban_view">
+            <field name="name">congreso.presentador.kanban</field>
+            <field name="model">congreso.presentador</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--list of field to be loaded -->
+                    <field name="nombre" />
+                    <field name="image" />
+                    <templates>
+                    <t t-name="kanban-box">
+                            <div class="oe_product_vignette">
+                                <a type="open">
+                                    <img class="oe_kanban_image"
+                                        t-att-src="kanban_image('congreso.presentador', 'image', record.id.value)" />
+                                </a>
+                                <div class="oe_product_desc">
+                                    <h4>
+                                        <a type="edit">
+                                            <field name="nombre"></field>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li><field name="empresa"></field> </li>
+                                        <li><field name="web"></field>  </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+    </record>
+    <record model="ir.ui.view" id="congreso_presentador_tree">
+      <field name="name">congreso.presentador.tree</field>
+      <field name="model">congreso.presentador</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="presentador">
+          <field name="nombre"/>
+          <field name="empresa"/>
+          <field name="direccion"/>
+          <field name="cif"/>
+          <field name="telefono"/>
+          <field name="email"/>
+          <field name="web"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="congreso_presentador_form">
+      <field name="name">congreso.presentador.form</field>
+      <field name="model">congreso.presentador</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="presentador">
+          <group>
+            <field name="image" widget='image' />
+            <field name="nombre"/>
+            <field name="empresa"/>
+            <field name="email"/>
+          </group>
+          <group>
+            <field name="direccion"/>
+            <field name="cif"/>
+            <field name="telefono"/>
+            <field name="web"/>
+          </group>
+          <newline/>
+          <group colspan="2" col="1">
+            <field name="informacion" placeholder= "información adicional..."/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="congreso_presentador_action" model="ir.actions.act_window">
+      <field name="name">Presentador</field>
+      <field name="res_model">congreso.presentador</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem action="congreso_presentador_action" id="congreso_presentador_menu" sequence="7" parent="congreso_ponencias"/>
+
+    <record model="ir.ui.view" id="custom_ponentes_kanban_view">
+            <field name="name">congreso.ponentes.kanban</field>
+            <field name="model">congreso.ponentes</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--list of field to be loaded -->
+                    <field name="nombre" />
+                    <field name="image" />
+                    <templates>
+                    <t t-name="kanban-box">
+                            <div class="oe_product_vignette">
+                                <a type="open">
+                                    <img class="oe_kanban_image"
+                                        t-att-src="kanban_image('congreso.ponentes', 'image', record.id.value)" />
+                                </a>
+                                <div class="oe_product_desc">
+                                    <h4>
+                                        <a type="edit">
+                                            <field name="nombre"></field>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li><field name="empresa"></field> </li>
+                                        <li><field name="web"></field>  </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+    </record>
+    <record model="ir.ui.view" id="congreso_ponentes_tree">
+      <field name="name">congreso.ponentes.tree</field>
+      <field name="model">congreso.ponentes</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="ponentes">
+          <field name="nombre"/>
+          <field name="empresa"/>
+          <field name="direccion"/>
+          <field name="cif"/>
+          <field name="telefono"/>
+          <field name="email"/>
+          <field name="web"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="congreso_ponentes_form">
+      <field name="name">congreso.ponentes.form</field>
+      <field name="model">congreso.ponentes</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="ponentes">
+          <group>
+            <field name="image" widget='image' />
+            <field name="nombre"/>
+            <field name="empresa"/>
+            <field name="email"/>
+          </group>
+          <group>
+            <field name="direccion"/>
+            <field name="cif"/>
+            <field name="telefono"/>
+            <field name="web"/>
+          </group>
+          <newline/>
+          <group colspan="2" col="1">
+            <field name="informacion" placeholder= "información adicional..."/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="congreso_ponentes_action" model="ir.actions.act_window">
+      <field name="name">Ponentes</field>
+      <field name="res_model">congreso.ponentes</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem action="congreso_ponentes_action" id="congreso_ponentes_menu" sequence="8" parent="congreso_ponencias"/>
+
+    <record model="ir.ui.view" id="custom_expositores_kanban_view">
+            <field name="name">congreso.expositores.kanban</field>
+            <field name="model">congreso.expositores</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--list of field to be loaded -->
+                    <field name="nombre" />
+                    <field name="image" />
+                    <templates>
+                    <t t-name="kanban-box">
+                            <div class="oe_product_vignette">
+                                <a type="open">
+                                    <img class="oe_kanban_image"
+                                        t-att-src="kanban_image('congreso.expositores', 'image', record.id.value)" />
+                                </a>
+                                <div class="oe_product_desc">
+                                    <h4>
+                                        <a type="edit">
+                                            <field name="nombre"></field>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li><field name="contacto"></field> </li>
+                                        <li><field name="web"></field>  </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+    </record>
+    <record model="ir.ui.view" id="congreso_expositores_tree">
+      <field name="name">congreso.expositores.tree</field>
+      <field name="model">congreso.expositores</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="expositores">
+          <field name="nombre"/>
+          <field name="contacto"/>
+          <field name="direccion"/>
+          <field name="cif"/>
+          <field name="telefono"/>
+          <field name="email"/>
+          <field name="web"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="congreso_expositores_form">
+      <field name="name">congreso.expositores.form</field>
+      <field name="model">congreso.expositores</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="expositores">
+          <group>
+            <field name="image" widget='image' />
+            <field name="nombre"/>
+            <field name="contacto"/>
+            <field name="email"/>
+          </group>
+          <group>
+            <field name="direccion"/>
+            <field name="cif"/>
+            <field name="telefono"/>
+            <field name="web"/>
+          </group>
+          <newline/>
+          <group colspan="2" col="1">
+            <field name="informacion" placeholder= "información adicional..."/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="congreso_expositores_action" model="ir.actions.act_window">
+      <field name="name">Expositores</field>
+      <field name="res_model">congreso.expositores</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem action="congreso_expositores_action" id="congreso_expositores_menu" sequence="9" parent="congreso_ponencias"/>
+
+    <record model="ir.ui.view" id="congreso_listapreinscritos_tree">
+      <field name="name">congreso.listapreinscritos.tree</field>
+      <field name="model">congreso.listapreinscritos</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="listapreinscritos">
+          <field name="nombre"/>
+          <field name="dni"/>
+          <field name="email"/>
+          <field name="direccioncompleta"/>
+          <field name="provincia"/>
+          <field name="pais"/>
+          <field name="tlf"/>
+          <field name="colectivo"/>
+          <field name="empresa"/>
+          <field name="cif"/>
+          <field name="ntrabajadores"/>
+          <field name="acluxega"/>
+          <field name="estudiante"/>
+          <field name="entidad"/>
+          <field name="pago"/>
+          <field name="cantidad"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="congreso_listapreinscritos_form">
+      <field name="name">congreso.listapreinscritos.form</field>
+      <field name="model">congreso.listapreinscritos</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="listapreinscritos">
+          <group string="Datos personales">
+          <field name="nombre"/>
+          <field name="dni"/>
+          <field name="email"/>
+          <field name="direccioncompleta"/>
+          <field name="provincia"/>
+          <field name="pais"/>
+          <field name="tlf"/>
+          </group>
+          <group string=" Datos profesionales">
+          <field name="colectivo"/>
+          <field name="empresa"/>
+          <field name="cif"/>
+          <field name="ntrabajadores"/>
+          <field name="acluxega"/>
+          <field name="estudiante"/>
+          <field name="entidad"/>
+          <field name="pago"/>
+          <field name="cantidad" placeholder= "cantidad..."/>
+          </group>
+          <newline/>
+          <group colspan="2" col="1">
+            <field name="informacion" placeholder= "información adicional..."/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="congreso_listapreinscritos_action" model="ir.actions.act_window">
+      <field name="name">Lista preinscritos</field>
+      <field name="res_model">congreso.listapreinscritos</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="congreso_listapreinscritos_action" id="congreso_listapreinscritos_menu" sequence="10" parent="congreso_participantes"/>
+
+    <record model="ir.ui.view" id="congreso_listamatriculados_tree">
+      <field name="name">congreso.listamatriculados.tree</field>
+      <field name="model">congreso.listamatriculados</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="listamatriculados">
+          <field name="nombre"/>
+          <field name="dni"/>
+          <field name="email"/>
+          <field name="direccioncompleta"/>
+          <field name="provincia"/>
+          <field name="pais"/>
+          <field name="tlf"/>
+          <field name="colectivo"/>
+          <field name="empresa"/>
+          <field name="cif"/>
+          <field name="ntrabajadores"/>
+          <field name="acluxega"/>
+          <field name="estudiante"/>
+          <field name="entidad"/>
+          <field name="pago"/>
+          <field name="cantidad"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="congreso_listamatriculados_form">
+      <field name="name">congreso.listamatriculados.form</field>
+      <field name="model">congreso.listamatriculados</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="listamatriculados">
+          <group string="Datos personales">
+          <field name="nombre"/>
+          <field name="dni"/>
+          <field name="email"/>
+          <field name="direccioncompleta"/>
+          <field name="provincia"/>
+          <field name="pais"/>
+          <field name="tlf"/>
+          </group>
+          <group string=" Datos profesionales">
+          <field name="colectivo"/>
+          <field name="empresa"/>
+          <field name="cif"/>
+          <field name="ntrabajadores"/>
+          <field name="acluxega"/>
+          <field name="estudiante"/>
+          <field name="entidad"/>
+          <field name="pago"/>
+          <field name="cantidad" placeholder= "cantidad..."/>
+          </group>
+          <newline/>
+          <group colspan="2" col="1">
+            <field name="informacion" placeholder= "información adicional..."/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="congreso_listamatriculados_action" model="ir.actions.act_window">
+      <field name="name">Lista matriculados</field>
+      <field name="res_model">congreso.listamatriculados</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="congreso_listamatriculados_action" id="congreso_listamatriculados_menu" sequence="11" parent="congreso_participantes"/>
+
+    <record model="ir.ui.view" id="custom_medios_kanban_view">
+            <field name="name">congreso.medios.kanban</field>
+            <field name="model">congreso.medios</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--list of field to be loaded -->
+                    <field name="name" />
+                    <field name="image" />
+                    <templates>
+                    <t t-name="kanban-box">
+                            <div class="oe_product_vignette">
+                                <a type="open">
+                                    <img class="oe_kanban_image"
+                                        t-att-src="kanban_image('congreso.medios', 'image', record.id.value)" />
+                                </a>
+                                <div class="oe_product_desc">
+                                    <h4>
+                                        <a type="edit">
+                                            <field name="name"></field>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li><field name="web"></field> </li>
+                                        <li><field name="contacto"></field>  </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+    </record>
+    <record model="ir.ui.view" id="congreso_medios_tree">
+      <field name="name">congreso.medios.tree</field>
+      <field name="model">congreso.medios</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="medios">
+          <field name="name"/>
+          <field name="web"/>
+          <field name="galicia"/>
+          <field name="estatal"/>
+          <field name="estranjero"/>
+          <field name="especializados"/>
+          <field name="online"/>
+          <field name="contacto"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="congreso_medios_form">
+      <field name="name">congreso.medios.form</field>
+      <field name="model">congreso.medios</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="medios">
+          <group>
+            <field name="image" widget='image' />
+            <field name="name"/>
+            <field name="web"/>
+          </group>
+          <group>
+            <field name="galicia"/>
+            <field name="estranjero"/>
+            <field name="especializados"/>
+            <field name="online"/>
+            <field name="contacto"/>
+          </group>
+          <newline/>
+          <group colspan="2" col="1">
+            <field name="informacion" placeholder= "información adicional..."/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="congreso_medios_action" model="ir.actions.act_window">
+      <field name="name">Medios</field>
+      <field name="res_model">congreso.medios</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem action="congreso_medios_action" id="congreso_medios_menu" sequence="12" parent="congreso_comunicacion"/>
+
+    <record model="ir.ui.view" id="congreso_contactos_tree">
+      <field name="name">congreso.contactos.tree</field>
+      <field name="model">congreso.contactos</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="contactos">
+          <field name="name"/>
+          <field name="medio"/>
+          <field name="email"/>
+          <field name="telefono"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="congreso_contactos_form">
+      <field name="name">congreso.contactos.form</field>
+      <field name="model">congreso.contactos</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="contactos">
+          <field name="name"/>
+          <field name="medio"/>
+          <field name="email"/>
+          <field name="telefono"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="congreso_contactos_action" model="ir.actions.act_window">
+      <field name="name">Contactos</field>
+      <field name="res_model">congreso.contactos</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="congreso_contactos_action" id="congreso_contactos_menu" sequence="13" parent="congreso_comunicacion"/>
+    <record model="ir.ui.view" id="congreso_webpropia_tree">
+      <field name="name">congreso.webpropia.tree</field>
+      <field name="model">congreso.webpropia</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="webpropia">
+          <field name="titulo"/>
+          <field name="enlace"/>
+          <field name="informacion"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="congreso_webpropia_form">
+      <field name="name">congreso.webpropia.form</field>
+      <field name="model">congreso.webpropia</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="webpropia">
+          <group>
+          <field name="titulo"/>
+          <field name="image" widget='image' />
+          <field name="enlace"/>
+          </group>
+          <newline/>
+          <group colspan="2" col="1">
+            <field name="informacion" placeholder= "Publicación o resumen..."/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="congreso_webpropia_action" model="ir.actions.act_window">
+      <field name="name">Web propia</field>
+      <field name="res_model">congreso.webpropia</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="congreso_webpropia_action" id="congreso_webpropia_menu" sequence="14" parent="congreso_comunicacion"/>
+
+    <record model="ir.ui.view" id="congreso_publicidad_tree">
+      <field name="name">congreso.publicidad.tree</field>
+      <field name="model">congreso.publicidad</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="publicidad">
+          <field name="fecha"/>
+          <field name="medio"/>
+          <field name="enlace"/>
+          <field name="informacion"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="congreso_publicidad_form">
+      <field name="name">congreso.publicidad.form</field>
+      <field name="model">congreso.publicidad</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="publicidad">
+          <field name="fecha"/>
+          <field name="medio"/>
+          <field name="enlace"/>
+          <newline/>
+            <notebook colspan="2">
+              <page string="Presupuesto">
+                <group colspan="2" col="1">
+                  <field name="presupuesto" placeholder= "Precios y gastos previstos..."/>
+                </group>
+              </page>
+              <page string="Contenido">
+                <group colspan="2" col="1">
+                  <field name="informacion" placeholder= "Contenido de la publicidad"/>
+                </group>
+              </page>
+            </notebook>
+          <newline/>
+          <group colspan="6" col="1">
+            <field name="image1" widget='image' />
+            <field name="image2" widget='image' />
+            <field name="image2" widget='image' />
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="congreso_publicidad_action" model="ir.actions.act_window">
+      <field name="name">Publicidad</field>
+      <field name="res_model">congreso.publicidad</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="congreso_publicidad_action" id="congreso_publicidad_menu" sequence="15" parent="congreso_comunicacion"/>
+
+    <record model="ir.ui.view" id="congreso_noticiasgen_tree">
+      <field name="name">congreso.noticiasgen.tree</field>
+      <field name="model">congreso.noticiasgen</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="noticiasgen">
+          <field name="fecha"/>
+          <field name="medio"/>
+          <field name="enlace"/>
+          <field name="informacion"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="congreso_noticiasgen_form">
+      <field name="name">congreso.noticiasgen.form</field>
+      <field name="model">congreso.noticiasgen</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="noticiasgen">
+          <field name="fecha"/>
+          <field name="medio"/>
+          <field name="enlace"/>
+          <newline/>
+          <group colspan="2" col="1">
+            <field name="informacion" placeholder= "Publicación o resumen..."/>
+          </group>
+          <newline/>
+          <group colspan="6" col="1">
+            <field name="image1" widget='image' />
+            <field name="image2" widget='image' />
+            <field name="image2" widget='image' />
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="congreso_noticiasgen_action" model="ir.actions.act_window">
+      <field name="name">Noticias generadas</field>
+      <field name="res_model">congreso.noticiasgen</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="congreso_noticiasgen_action" id="congreso_noticiasgen_menu" sequence="16" parent="congreso_comunicacion"/>
+
+    <record model="ir.ui.view" id="congreso_imagenes_tree">
+      <field name="name">congreso.imagenes.tree</field>
+      <field name="model">congreso.imagenes</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="imagenes">
+          <field name="evento"/>
+          <field name="fecha"/>
+          <field name="informacion"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="congreso_imagenes_form">
+      <field name="name">congreso.imagenes.form</field>
+      <field name="model">congreso.imagenes</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="imagenes">
+          <field name="evento"/>
+          <field name="fecha"/>
+          <newline/>
+          <group colspan="2" col="1">
+            <field name="informacion" placeholder= "Publicación o resumen..."/>
+          </group>
+          <newline/>
+          <group colspan="20" col="1">
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="congreso_imagenes_action" model="ir.actions.act_window">
+      <field name="name">Imagenes</field>
+      <field name="res_model">congreso.imagenes</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="congreso_imagenes_action" id="congreso_imagenes_menu" sequence="17" parent="congreso_comunicacion"/>
+  </data>
+</openerp>

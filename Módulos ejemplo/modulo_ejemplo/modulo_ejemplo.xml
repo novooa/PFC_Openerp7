@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+  <data>
+    <menuitem name="Módulo ejemplo" id="moduloejemplo" sequence="90"/>
+    <menuitem name="Menú propio" id="moduloejemplo_menupropio" parent="moduloejemplo"/>
+
+    <record model="ir.ui.view" id="custom_objeto_kanban_view">
+            <field name="name">modulo_ejemplo.objeto.kanban</field>
+            <field name="model">modulo_ejemplo.objeto</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--list of field to be loaded -->
+                    <field name="cadena" />
+                    <field name="image" />
+                    <templates>
+                    <t t-name="kanban-box">
+                            <div class="oe_product_vignette">
+                                <a type="open">
+                                    <img class="oe_kanban_image"
+                                        t-att-src="kanban_image('modulo_ejemplo.objeto', 'image', record.id.value)" />
+                                </a>
+                                <div class="oe_product_desc">
+                                    <h4>
+                                        <a type="edit">
+                                            <field name="cadena"></field>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li><field name="relacion_id"></field> </li>
+                                        <li><field name="boleano"></field>  </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+    </record>
+    <record model="ir.ui.view" id="modulo_ejemplo_objeto_tree">
+      <field name="name">modulo_ejemplo.objeto.tree</field>
+      <field name="model">modulo_ejemplo.objeto</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="objeto">
+          <field name="cadena"/>
+          <field name="boleano"/>
+          <field name="numerico"/>
+          <field name="float"/>
+          <field name="fecha"/>
+          <field name="fechayhora"/>
+          <field name="seleccion"/>
+          <field name="relacion_id"/>
+          <field name="archivo" widget='url'/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="modulo_ejemplo.objeto_form">
+      <field name="name">modulo_ejemplo.objeto.form</field>
+      <field name="model">modulo_ejemplo.objeto</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="objeto">
+          <group string="Nombre de grupo">
+          <field name="image" widget='image' />
+          <field name="cadena"/>
+          <field name="boleano"/>
+          <field name="numerico"/>
+          <field name="float"/>
+          </group>
+          <group>
+          <field name="fecha"/>
+          <field name="fechayhora"/>
+          <field name="seleccion"/>
+          <field name="relacion_id"/>
+          <field name="archivo"/>
+          </group>
+          <newline/>
+           <group colspan="2" col="1">
+             <field name="relacionlista_ids"/>
+           </group>
+          <newline/>
+          <separator string="Libreta" colspan="4"/>
+            <notebook colspan="4">
+              <page string="Página 1">
+                <group colspan="2" col="1">
+                  <field name="textouno" placeholder= "Para hacer una descripción..."/>
+                </group>
+              </page>
+              <page string="Página dos">
+                <group colspan="2" col="1">
+                  <field name="textodos" placeholder= "o poner lo que quiera..."/>
+                </group>
+              </page>
+              <page string="Página 3">
+                <group colspan="2" col="1">
+                  <field name="cadenados" placeholder="aqui tambien se puede..."/>
+                  <field name="texto3" placeholder="distintos tipos de campos"/>
+                </group>
+              </page>
+              <page string="Página 4">
+                <group colspan="2" col="1">
+                  <field name="texto4"/>
+                </group>
+              </page>
+            </notebook>
+        </form>
+      </field>
+    </record>
+
+    <record id="modulo_ejemplo_objeto_action" model="ir.actions.act_window">
+      <field name="name">Objeto</field>
+      <field name="res_model">modulo_ejemplo.objeto</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem action="modulo_ejemplo_objeto_action" id="modulo_ejemplo_objeto_menu" sequence="1" parent="moduloejemplo_menupropio"/>
+
+    <record model="ir.ui.view" id="modulo_ejemplo_objetorelacion_tree">
+      <field name="name">modulo_ejemplo.objetorelacion.tree</field>
+      <field name="model">modulo_ejemplo.objetorelacion</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="objetorelacion">
+          <field name="name"/>
+          <field name="otro"/>
+          <field name="otrocampomas"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="modulo_ejemplo_objetorelacion_form">
+      <field name="name">modulo_ejemplo.objetorelacion.form</field>
+      <field name="model">modulo_ejemplo.objetorelacion</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="objetorelacion">
+          <field name="name"/>
+          <field name="otro"/>
+          <newline/>
+          <group colspan="2" col="1">
+          <field name="otrocampomas" placeholder= "newline..."/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="modulo_ejemplo_objetorelacion_action" model="ir.actions.act_window">
+      <field name="name">Objeto relacion</field>
+      <field name="res_model">modulo_ejemplo.objetorelacion</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="modulo_ejemplo_objetorelacion_action" id="modulo_ejemplo_objetorelacion_menu" sequence="2" parent="modulo_ejemplo_objeto_menu"/>
+
+    <record model="ir.ui.view" id="modulo_ejemplo_objetorelacionlista_tree">
+      <field name="name">modulo_ejemplo.objetorelacionlista.tree</field>
+      <field name="model">modulo_ejemplo.objetorelacionlista</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="objetorelacionlista">
+          <field name="campouno"/>
+          <field name="campodos"/>
+          <field name="campotres"/>
+          <field name="campocuatro"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="modulo_ejemplo_objetorelacionlista_form">
+      <field name="name">modulo_ejemplo.objetorelacionlista.form</field>
+      <field name="model">modulo_ejemplo.objetorelacionlista</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="objetorelacionlista">
+          <field name="image" widget='image' />
+          <field name="campouno"/>
+          <field name="campodos"/>
+          <field name="campotres"/>
+          <field name="campocuatro"/>
+          <newline/>
+          <group colspan="2" col="1">
+          <field name="otrocampomas" placeholder= "newline..."/>
+          </group>
+        </form>
+      </field>
+    </record>
+  </data>
+</openerp>

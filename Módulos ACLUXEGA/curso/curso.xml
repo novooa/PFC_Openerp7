@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+  <data>
+    <menuitem name="Curso" id="curso" sequence="90"/>
+    <menuitem name="Ficha del curso" id="curso_fichadelcurso" parent="curso"/>
+    <menuitem name="Calendario y fechas" id="curso_calendarioyfecha" parent="curso" />
+    <menuitem name="Alumnos" id="curso_alumnos" parent="curso" />
+    <menuitem name="Formacion bonificada" id="curso_formacionbonificada" parent="curso" />
+    <menuitem name="Profesorado" id="curso_profesorado" parent="curso" />
+
+    <record model="ir.ui.view" id="curso_ficha_tree">
+      <field name="name">curso.ficha.tree</field>
+      <field name="model">curso.ficha</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="ficha">
+          <field name="nombre"/>
+          <field name="tipo"/>
+          <field name="codigo"/>
+          <field name="modalidad"/>
+          <field name="objetivo"/>
+          <field name="entidadesorganizadoras"/>
+          <field name="coordinadores"/>
+          <field name="destinatarios"/>
+          <field name="extension"/>
+          <field name="plazas"/>
+          <field name="ficha" widget='url'/>
+          <field name="abrir"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="curso_ficha_form">
+      <field name="name">curso.ficha.form</field>
+      <field name="model">curso.ficha</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="ficha">
+          <field name="nombre"/>
+          <field name="tipo"/>
+          <field name="codigo"/>
+          <field name="modalidad"/>
+          <field name="objetivo"/>
+          <field name="entidadesorganizadoras"/>
+          <field name="coordinadores"/>
+          <field name="destinatarios"/>
+          <field name="extension"/>
+          <field name="plazas"/>
+          <field name="ficha" />
+          <field name="abrir" placeholder= "indicar pdf,word..."/>
+            <notebook colspan="8">
+              <page string="Créditos">
+                <group colspan="2" col="1">
+                  <field name="creditos" placeholder= "Creditos de libre eleccion, ECTS..."/>
+                </group>
+              </page>
+              <page string="Programa">
+                <group colspan="2" col="1">
+                  <field name="programa" placeholder= "Introduzca el temario del curso"/>
+                </group>
+              </page>
+              <page string="Materiales">
+                <group colspan="2" col="1">
+                  <field name="materiales" placeholder="Materiales a emplear..."/>
+                </group>
+              </page>
+              <page string="Condiciones acceso">
+                <group colspan="2" col="1">
+                  <field name="condicionesacceso" placeholder="condiciones de acceso al curso"/>
+                </group>
+              </page>
+              <page string="Sistema evaluación">
+                <group colspan="2" col="1">
+                  <field name="sistemaevaluacion" placeholder="Formacion continua, examenes, valoracion asistencia..."/>
+                </group>
+              </page>
+              <page string="Método de pago">
+                <group colspan="2" col="1">
+                  <field name="metododepago" placeholder="Precios asociados, no asociados, universitarios..."/>
+                </group>
+              </page>
+              <page string="Metodología">
+                <group colspan="2" col="1">
+                  <field name="metodologia"/>
+                </group>
+              </page>
+              <page string="Observaciones">
+                <group colspan="2" col="1">
+                  <field name="observaciones"/>
+                </group>
+              </page>
+            </notebook>
+        </form>
+      </field>
+    </record>
+
+    <record id="curso_ficha_action" model="ir.actions.act_window">
+      <field name="name">Ficha</field>
+      <field name="res_model">curso.ficha</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="curso_ficha_action" id="curso_ficha_menu" sequence="1" parent="curso_fichadelcurso"/>
+
+    <record model="ir.ui.view" id="curso_periododematricula_tree">
+      <field name="name">curso.periododematricula.tree</field>
+      <field name="model">curso.periododematricula</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="periododematricula">
+          <field name="desde"/>
+          <field name="hasta"/>
+          <field name="observaciones"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="curso_periododematricula_form">
+      <field name="name">curso.periododematricula.form</field>
+      <field name="model">curso.periododematricula</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="periododematricula">
+          <field name="desde"/>
+          <field name="hasta"/>
+          <field name="observaciones"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="curso_periododematricula_action" model="ir.actions.act_window">
+      <field name="name">Periodo de matricula</field>
+      <field name="res_model">curso.periododematricula</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="curso_periododematricula_action" id="curso_periododematricula_menu" sequence="2" parent="curso_calendarioyfecha"/>
+
+    <record model="ir.ui.view" id="curso_periododedocencia_tree">
+      <field name="name">curso.periododedocencia.tree</field>
+      <field name="model">curso.periododedocencia</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="periododedocencia">
+          <field name="desde"/>
+          <field name="hasta"/>
+          <field name="observaciones"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="curso_periododedocencia_form">
+      <field name="name">curso.periododedocencia.form</field>
+      <field name="model">curso.periododedocencia</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="periododedocencia">
+          <field name="desde"/>
+          <field name="hasta"/>
+          <field name="observaciones"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="curso_periododedocencia_action" model="ir.actions.act_window">
+      <field name="name">Periodo de docencia</field>
+      <field name="res_model">curso.periododedocencia</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="curso_periododedocencia_action" id="curso_periododedocencia_menu" sequence="3" parent="curso_calendarioyfecha"/>
+
+    <record model="ir.ui.view" id="curso_listapreinscritos_tree">
+      <field name="name">curso.listapreinscritos.tree</field>
+      <field name="model">curso.listapreinscritos</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="listapreinscritos">
+          <field name="nombre"/>
+          <field name="dni"/>
+          <field name="email"/>
+          <field name="direccioncompleta"/>
+          <field name="provincia"/>
+          <field name="pais"/>
+          <field name="tlf"/>
+          <field name="colectivo"/>
+          <field name="empresa"/>
+          <field name="cif"/>
+          <field name="ntrabajadores"/>
+          <field name="acluxega"/>
+          <field name="bonificada"/>
+          <field name="etiquetas"/>
+          <field name="pago"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="curso_listapreinscritos_form">
+      <field name="name">curso.listapreinscritos.form</field>
+      <field name="model">curso.listapreinscritos</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="listapreinscritos">
+          <group string="Datos personales">
+          <field name="nombre"/>
+          <field name="dni"/>
+          <field name="email"/>
+          <field name="direccioncompleta"/>
+          <field name="provincia"/>
+          <field name="pais"/>
+          <field name="tlf"/>
+          </group>
+          <group string=" Datos profesionales">
+          <field name="colectivo"/>
+          <field name="empresa"/>
+          <field name="cif"/>
+          <field name="ntrabajadores"/>
+          <field name="acluxega"/>
+          <field name="bonificada"/>
+          <field name="etiquetas"/>
+          <field name="pago"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="curso_listapreinscritos_action" model="ir.actions.act_window">
+      <field name="name">Lista preinscritos</field>
+      <field name="res_model">curso.listapreinscritos</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="curso_listapreinscritos_action" id="curso_listapreinscritos_menu" sequence="4" parent="curso_alumnos"/>
+
+    <record model="ir.ui.view" id="curso_listamatriculados_tree">
+      <field name="name">curso.listamatriculados.tree</field>
+      <field name="model">curso.listamatriculados</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="listamatriculados">
+          <field name="name"/>
+          <field name="dni"/>
+          <field name="email"/>
+          <field name="direccioncompleta"/>
+          <field name="cp"/>
+          <field name="ciudad"/>
+          <field name="provincia"/>
+          <field name="pais"/>
+          <field name="tlf"/>
+          <field name="colectivo"/>
+          <field name="empresa"/>
+          <field name="cif"/>
+          <field name="ntrabajadores"/>
+          <field name="acluxega"/>
+          <field name="bonificada"/>
+          <field name="etiquetas"/>
+          <field name="pago"/>
+          <field name="entregadomanual"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="curso_listamatriculados_form">
+      <field name="name">curso.listamatriculados.form</field>
+      <field name="model">curso.listamatriculados</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="listamatriculados">
+          <group string="Datos personales">
+          <field name="name"/>
+          <field name="dni"/>
+          <field name="email"/>
+          <field name="direccioncompleta"/>
+          <field name="cp"/>
+          <field name="ciudad"/>
+          <field name="provincia"/>
+          <field name="pais"/>
+          <field name="tlf"/>
+          </group>
+          <group string=" Datos profesionales">
+          <field name="colectivo"/>
+          <field name="empresa"/>
+          <field name="cif"/>
+          <field name="ntrabajadores"/>
+          <field name="acluxega"/>
+          <field name="bonificada"/>
+          <field name="etiquetas"/>
+          <field name="pago"/>
+          <field name="entregadomanual"/>
+          </group>
+          <newline/>
+            <notebook>
+              <page string="Asistencia">
+                <group colspan="2" col="1">
+                  <field name="asistencia_id"/>
+                </group>
+              </page>
+            </notebook>
+            <notebook>
+              <page string="Evaluación">
+                <group colspan="2" col="1">
+                  <field name="total"/>
+                  <field name="evaluacion_id"/>
+                </group>
+              </page>
+            </notebook>
+        </form>
+      </field>
+    </record>
+
+    <record id="curso_listamatriculados_action" model="ir.actions.act_window">
+      <field name="name">Lista matriculados</field>
+      <field name="res_model">curso.listamatriculados</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="curso_listamatriculados_action" id="curso_listamatriculados_menu" sequence="5" parent="curso_alumnos"/>
+
+    <record model="ir.ui.view" id="curso_asistencia_tree">
+      <field name="name">curso.asistencia.tree</field>
+      <field name="model">curso.asistencia</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="asistencia">
+          <field name="jornada"/>
+          <field name="asistio"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="curso_asistencia_form">
+      <field name="name">curso.asistencia.form</field>
+      <field name="model">curso.asistencia</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="asistencia">
+          <field name="jornada"/>
+          <field name="asistio"/>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="curso_evaluacion_tree">
+      <field name="name">curso.evaluacion.tree</field>
+      <field name="model">curso.evaluacion</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="evaluacion">
+          <field name="tema"/>
+          <field name="nota"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="curso_evaluacion_form">
+      <field name="name">curso.evaluacion.form</field>
+      <field name="model">curso.evaluacion</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="evaluacion">
+          <field name="tema"/>
+          <field name="nota"/>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="curso_listabajas_tree">
+      <field name="name">curso.listabajas.tree</field>
+      <field name="model">curso.listabajas</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="listabajas">
+          <field name="nombre"/>
+          <field name="dni"/>
+          <field name="email"/>
+          <field name="direccioncompleta"/>
+          <field name="cp"/>
+          <field name="ciudad"/>
+          <field name="provincia"/>
+          <field name="pais"/>
+          <field name="tlf"/>
+          <field name="colectivo"/>
+          <field name="empresa"/>
+          <field name="cif"/>
+          <field name="ntrabajadores"/>
+          <field name="acluxega"/>
+          <field name="bonificada"/>
+          <field name="etiquetas"/>
+          <field name="pago"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="curso_listabajas_form">
+      <field name="name">curso.listabajas.form</field>
+      <field name="model">curso.listabajas</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="listabajas">
+          <group string="Datos personales">
+          <field name="nombre"/>
+          <field name="dni"/>
+          <field name="email"/>
+          <field name="direccioncompleta"/>
+          <field name="cp"/>
+          <field name="ciudad"/>
+          <field name="provincia"/>
+          <field name="pais"/>
+          <field name="tlf"/>
+          </group>
+          <group string="Datos profesionales">
+          <field name="colectivo"/>
+          <field name="empresa"/>
+          <field name="cif"/>
+          <field name="ntrabajadores"/>
+          <field name="acluxega"/>
+          <field name="bonificada"/>
+          <field name="etiquetas"/>
+          <field name="pago"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="curso_listabajas_action" model="ir.actions.act_window">
+      <field name="name">Lista bajas</field>
+      <field name="res_model">curso.listabajas</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="curso_listabajas_action" id="curso_listabajas_menu" sequence="7" parent="curso_alumnos"/>
+
+
+    <record model="ir.ui.view" id="curso_fichaalumnos_tree">
+      <field name="name">curso.fichaalumnos.tree</field>
+      <field name="model">curso.fichaalumnos</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="fichaalumnos">
+          <field name="nombre"/>
+          <field name="dni"/>
+          <field name="email"/>
+          <field name="direccioncompleta"/>
+          <field name="cp"/>
+          <field name="ciudad"/>
+          <field name="provincia"/>
+          <field name="pais"/>
+          <field name="tlf"/>
+          <field name="colectivo"/>
+          <field name="empresa"/>
+          <field name="cif"/>
+          <field name="ntrabajadores"/>
+          <field name="pago"/>
+          <field name="entregadomanual"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="curso_fichaalumnos_form">
+      <field name="name">curso.fichaalumnos.form</field>
+      <field name="model">curso.fichaalumnos</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="fichaalumnos">
+          <group string="Datos personales">
+          <field name="nombre"/>
+          <field name="dni"/>
+          <field name="email"/>
+          <field name="direccioncompleta"/>
+          <field name="cp"/>
+          <field name="ciudad"/>
+          <field name="provincia"/>
+          <field name="pais"/>
+          <field name="tlf"/>
+          </group>
+          <group string="Datos profesionales">
+          <field name="colectivo"/>
+          <field name="empresa"/>
+          <field name="cif"/>
+          <field name="ntrabajadores"/>
+          <field name="pago"/>
+          <field name="entregadomanual"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="curso_fichaalumnos_action" model="ir.actions.act_window">
+      <field name="name">Ficha alumnos</field>
+      <field name="res_model">curso.fichaalumnos</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="curso_fichaalumnos_action" id="curso_fichaalumnos_menu" sequence="9" parent="curso_formacionbonificada"/>
+
+    <record model="ir.ui.view" id="curso_tutores_tree">
+      <field name="name">curso.tutores.tree</field>
+      <field name="model">curso.tutores</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="tutores">
+          <field name="nombre"/>
+          <field name="dni"/>
+          <field name="email"/>
+          <field name="tlf"/>
+          <field name="direccion"/>
+          <field name="modulo"/>
+          <field name="disponibilidaddiayhoras"/>
+          <field name="tutoriasdiayhoras"/>
+          <field name="horasclasediayhoras"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="curso_tutores_form">
+      <field name="name">curso.tutores.form</field>
+      <field name="model">curso.tutores</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="tutores">
+          <group string="Datos personales">
+          <field name="nombre"/>
+          <field name="dni"/>
+          <field name="email"/>
+          <field name="tlf"/>
+          <field name="direccion"/>
+          <field name="modulo"/>
+          </group>
+          <group string="Horarios">
+            <notebook>
+              <page string="Disponibilidad">
+                <group colspan="2" col="1">
+                  <field name="disponibilidaddiayhoras"/>
+                </group>
+              </page>
+              <page string="Tutorías">
+                <group colspan="2" col="1">
+                  <field name="tutoriasdiayhoras"/>
+                </group>
+              </page>
+              <page string="Horarios clase">
+                <group colspan="2" col="1">
+                  <field name="horasclasediayhoras"/>
+                </group>
+              </page>
+            </notebook>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="curso_tutores_action" model="ir.actions.act_window">
+      <field name="name">Tutores</field>
+      <field name="res_model">curso.tutores</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="curso_tutores_action" id="curso_tutores_menu" sequence="10" parent="curso_profesorado"/>
+  </data>
+</openerp>

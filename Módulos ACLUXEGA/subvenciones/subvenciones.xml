@@ -1,0 +1,1213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+  <data>
+    <menuitem name="Subvenciones" id="subvenciones" sequence="90"/>
+    <menuitem name="Subvenciones estatales" id="subvenciones_subvenciones_estatales" parent="subvenciones"/>
+    <menuitem name="Subvenciones extranjeras" id="subvenciones_subvenciones_extranjeras" parent="subvenciones" />
+    <menuitem name="Ayudas y becas" id="subvenciones_ayudasybecas" parent="subvenciones" />
+    <menuitem name="Subenciones interes" id="subvenciones_subvenciones_interes" parent="subvenciones" />
+
+    <record model="ir.ui.view" id="custom_geotermia_kanban_view">
+            <field name="name">subvenciones.geotermia.kanban</field>
+            <field name="model">subvenciones.geotermia</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--list of field to be loaded -->
+                    <field name="lugar" />
+                    <field name="image" />
+                    <templates>
+                    <t t-name="kanban-box">
+                            <div class="oe_product_vignette">
+                                <a type="open">
+                                    <img class="oe_kanban_image"
+                                        t-att-src="kanban_image('subvenciones.geotermia', 'image', record.id.value)" />
+                                </a>
+                                <div class="oe_product_desc">
+                                    <h4>
+                                        <a type="edit">
+                                            <field name="lugar"></field>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li><field name="fecha"></field> </li>
+                                        <li><field name="institucion"></field>  </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+    </record>
+
+    <record model="ir.ui.view" id="subvenciones_geotermia_tree">
+      <field name="name">subvenciones.geotermia.tree</field>
+      <field name="model">subvenciones.geotermia</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="geotermia">
+          <field name="lugar"/>
+          <field name="fecha"/>
+          <field name="institucion"/>
+          <field name="privada"/>
+          <field name="nboletin"/>
+          <field name="nombre"/>
+          <field name="beneficiarios"/>
+          <field name="fondostotales"/>
+          <field name="fondossubvencionados"/>
+          <field name="fondosaportados"/>
+          <field name="fondosgeotermia"/>
+          <field name="inversionreal"/>
+          <field name="otrosimportes"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="subvenciones_geotermia_form">
+      <field name="name">subvenciones.geotermia.form</field>
+      <field name="model">subvenciones.geotermia</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="geotermia">
+          <group string="Entidad">
+            <field name="image" widget='image'/>
+            <field name="lugar"/>
+            <field name="fecha"/>
+            <field name="institucion"/>
+            <field name="privada"/>
+            <field name="nboletin"/>
+            <field name="nombre"/>
+            <field name="nombreuno"/>
+            <field name="nombredos"/>
+            <field name="beneficiarios" placeholder= "beneficiarios..."/>
+          </group>
+          <group string="Cuantías">
+            <field name="fondostotales"/>
+            <field name="fondossubvencionados"/>
+            <field name="fondosaportados"/>
+            <field name="fondosgeotermia"/>
+            <field name="inversionreal"/>
+            <field name="otrosimportes"/>
+          </group>
+          <newline/>
+          <group string="Resumen" colspan="2" col="1">
+            <field name="resumen"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="subvenciones_geotermia_action" model="ir.actions.act_window">
+      <field name="name">Geotermia</field>
+      <field name="res_model">subvenciones.geotermia</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem action="subvenciones_geotermia_action" id="subvenciones_geotermia_menu" sequence="1" parent="subvenciones_subvenciones_estatales"/>
+
+    <record model="ir.ui.view" id="custom_renovables_kanban_view">
+            <field name="name">subvenciones.renovables.kanban</field>
+            <field name="model">subvenciones.renovables</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--list of field to be loaded -->
+                    <field name="lugar" />
+                    <field name="image" />
+                    <templates>
+                    <t t-name="kanban-box">
+                            <div class="oe_product_vignette">
+                                <a type="open">
+                                    <img class="oe_kanban_image"
+                                        t-att-src="kanban_image('subvenciones.renovables', 'image', record.id.value)" />
+                                </a>
+                                <div class="oe_product_desc">
+                                    <h4>
+                                        <a type="edit">
+                                            <field name="lugar"></field>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li><field name="fecha"></field> </li>
+                                        <li><field name="institucion"></field>  </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+    </record>
+
+    <record model="ir.ui.view" id="subvenciones_renovables_tree">
+      <field name="name">subvenciones.renovables.tree</field>
+      <field name="model">subvenciones.renovables</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="renovables">
+          <field name="lugar"/>
+          <field name="fecha"/>
+          <field name="institucion"/>
+          <field name="privada"/>
+          <field name="nboletin"/>
+          <field name="nombre"/>
+          <field name="beneficiarios"/>
+          <field name="fondostotales"/>
+          <field name="fondossubvencionados"/>
+          <field name="fondosaportados"/>
+          <field name="fondosgeotermia"/>
+          <field name="inversionreal"/>
+          <field name="otrosimportes"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="subvenciones_renovables_form">
+      <field name="name">subvenciones.renovables.form</field>
+      <field name="model">subvenciones.renovables</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="renovables">
+          <group string="Entidad">
+            <field name="image" widget='image'/>
+            <field name="lugar"/>
+            <field name="fecha"/>
+            <field name="institucion"/>
+            <field name="privada"/>
+            <field name="nboletin"/>
+            <field name="nombre"/>
+            <field name="nombreuno"/>
+            <field name="nombredos"/>
+            <field name="beneficiarios" placeholder= "beneficiarios..."/>
+          </group>
+          <group string="Cuantías">
+            <field name="fondostotales"/>
+            <field name="fondossubvencionados"/>
+            <field name="fondosaportados"/>
+            <field name="fondosgeotermia"/>
+            <field name="inversionreal"/>
+            <field name="otrosimportes"/>
+          </group>
+          <newline/>
+          <group string="Resumen" colspan="2" col="1">
+            <field name="resumen"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="subvenciones_renovables_action" model="ir.actions.act_window">
+      <field name="name">Renovables</field>
+      <field name="res_model">subvenciones.renovables</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem action="subvenciones_renovables_action" id="subvenciones_renovables_menu" sequence="2" parent="subvenciones_subvenciones_estatales"/>
+
+    <record model="ir.ui.view" id="custom_energia_kanban_view">
+            <field name="name">subvenciones.energia.kanban</field>
+            <field name="model">subvenciones.energia</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--list of field to be loaded -->
+                    <field name="lugar" />
+                    <field name="image" />
+                    <templates>
+                    <t t-name="kanban-box">
+                            <div class="oe_product_vignette">
+                                <a type="open">
+                                    <img class="oe_kanban_image"
+                                        t-att-src="kanban_image('subvenciones.energia', 'image', record.id.value)" />
+                                </a>
+                                <div class="oe_product_desc">
+                                    <h4>
+                                        <a type="edit">
+                                            <field name="lugar"></field>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li><field name="fecha"></field> </li>
+                                        <li><field name="institucion"></field>  </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+    </record>
+
+    <record model="ir.ui.view" id="subvenciones_energia_tree">
+      <field name="name">subvenciones.energia.tree</field>
+      <field name="model">subvenciones.energia</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="energia">
+          <field name="lugar"/>
+          <field name="fecha"/>
+          <field name="institucion"/>
+          <field name="privada"/>
+          <field name="nboletin"/>
+          <field name="nombre"/>
+          <field name="beneficiarios"/>
+          <field name="fondostotales"/>
+          <field name="fondossubvencionados"/>
+          <field name="fondosaportados"/>
+          <field name="fondosgeotermia"/>
+          <field name="inversionreal"/>
+          <field name="otrosimportes"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="subvenciones_energia_form">
+      <field name="name">subvenciones.energia.form</field>
+      <field name="model">subvenciones.energia</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="energia">
+          <group string="Entidad">
+            <field name="image" widget='image'/>
+            <field name="lugar"/>
+            <field name="fecha"/>
+            <field name="institucion"/>
+            <field name="privada"/>
+            <field name="nboletin"/>
+            <field name="nombre"/>
+            <field name="nombreuno"/>
+            <field name="nombredos"/>
+            <field name="beneficiarios" placeholder= "beneficiarios..."/>
+          </group>
+          <group string="Cuantías">
+            <field name="fondostotales"/>
+            <field name="fondossubvencionados"/>
+            <field name="fondosaportados"/>
+            <field name="fondosgeotermia"/>
+            <field name="inversionreal"/>
+            <field name="otrosimportes"/>
+          </group>
+          <newline/>
+          <group string="Resumen" colspan="2" col="1">
+            <field name="resumen"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="subvenciones_energia_action" model="ir.actions.act_window">
+      <field name="name">Energia</field>
+      <field name="res_model">subvenciones.energia</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem action="subvenciones_energia_action" id="subvenciones_energia_menu" sequence="3" parent="subvenciones_subvenciones_estatales"/>
+
+    <record model="ir.ui.view" id="custom_otras_kanban_view">
+            <field name="name">subvenciones.otras.kanban</field>
+            <field name="model">subvenciones.otras</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--list of field to be loaded -->
+                    <field name="lugar" />
+                    <field name="image" />
+                    <templates>
+                    <t t-name="kanban-box">
+                            <div class="oe_product_vignette">
+                                <a type="open">
+                                    <img class="oe_kanban_image"
+                                        t-att-src="kanban_image('subvenciones.otras', 'image', record.id.value)" />
+                                </a>
+                                <div class="oe_product_desc">
+                                    <h4>
+                                        <a type="edit">
+                                            <field name="lugar"></field>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li><field name="fecha"></field> </li>
+                                        <li><field name="institucion"></field>  </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+    </record>
+
+    <record model="ir.ui.view" id="subvenciones_otras_tree">
+      <field name="name">subvenciones.otras.tree</field>
+      <field name="model">subvenciones.otras</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="otras">
+          <field name="lugar"/>
+          <field name="fecha"/>
+          <field name="institucion"/>
+          <field name="privada"/>
+          <field name="nboletin"/>
+          <field name="nombre"/>
+          <field name="beneficiarios"/>
+          <field name="fondostotales"/>
+          <field name="fondossubvencionados"/>
+          <field name="fondosaportados"/>
+          <field name="fondosgeotermia"/>
+          <field name="inversionreal"/>
+          <field name="otrosimportes"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="subvenciones_otras_form">
+      <field name="name">subvenciones.otras.form</field>
+      <field name="model">subvenciones.otras</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="otras">
+          <group string="Entidad">
+            <field name="image" widget='image'/>
+            <field name="lugar"/>
+            <field name="fecha"/>
+            <field name="institucion"/>
+            <field name="privada"/>
+            <field name="nboletin"/>
+            <field name="nombre"/>
+            <field name="nombreuno"/>
+            <field name="nombredos"/>
+            <field name="beneficiarios" placeholder= "beneficiarios..."/>
+          </group>
+          <group string="Cuantías">
+            <field name="fondostotales"/>
+            <field name="fondossubvencionados"/>
+            <field name="fondosaportados"/>
+            <field name="fondosgeotermia"/>
+            <field name="inversionreal"/>
+            <field name="otrosimportes"/>
+          </group>
+          <newline/>
+          <group string="Resumen" colspan="2" col="1">
+            <field name="resumen"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="subvenciones_otras_action" model="ir.actions.act_window">
+      <field name="name">Otras</field>
+      <field name="res_model">subvenciones.otras</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem action="subvenciones_otras_action" id="subvenciones_otras_menu" sequence="4" parent="subvenciones_subvenciones_estatales"/>
+
+    <record model="ir.ui.view" id="subvenciones_unioneuropea_tree">
+      <field name="name">subvenciones.unioneuropea.tree</field>
+      <field name="model">subvenciones.unioneuropea</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="unioneuropea">
+          <field name="tipo"/>
+          <field name="lugar"/>
+          <field name="fecha"/>
+          <field name="institucion"/>
+          <field name="privada"/>
+          <field name="nboletin"/>
+          <field name="nombre"/>
+          <field name="beneficiarios"/>
+          <field name="fondostotales"/>
+          <field name="fondossubvencionados"/>
+          <field name="fondosaportados"/>
+          <field name="fondosgeotermia"/>
+          <field name="inversionreal"/>
+          <field name="otrosimportes"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="subvenciones_unioneuropea_form">
+      <field name="name">subvenciones.unioneuropea.form</field>
+      <field name="model">subvenciones.unioneuropea</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="unioneuropea">
+          <group string="Entidad">
+            <field name="tipo"/>
+            <field name="lugar"/>
+            <field name="fecha"/>
+            <field name="institucion"/>
+            <field name="privada"/>
+            <field name="nboletin"/>
+            <field name="nombre"/>
+            <field name="nombreuno"/>
+            <field name="nombredos"/>
+            <field name="beneficiarios" placeholder= "beneficiarios..."/>
+          </group>
+          <group string="Cuantías">
+            <field name="fondostotales"/>
+            <field name="fondossubvencionados"/>
+            <field name="fondosaportados"/>
+            <field name="fondosgeotermia"/>
+            <field name="inversionreal"/>
+            <field name="otrosimportes"/>
+          </group>
+          <newline/>
+          <group string="Resumen" colspan="2" col="1">
+            <field name="resumen"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="subvenciones_unioneuropea_action" model="ir.actions.act_window">
+      <field name="name">Union europea</field>
+      <field name="res_model">subvenciones.unioneuropea</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="subvenciones_unioneuropea_action" id="subvenciones_unioneuropea_menu" sequence="5" parent="subvenciones_subvenciones_extranjeras"/>
+
+    <record model="ir.ui.view" id="subvenciones_otra_tree">
+      <field name="name">subvenciones.otra.tree</field>
+      <field name="model">subvenciones.otra</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="otra">
+          <field name="tipo"/>
+          <field name="lugar"/>
+          <field name="fecha"/>
+          <field name="institucion"/>
+          <field name="privada"/>
+          <field name="nboletin"/>
+          <field name="nombre"/>
+          <field name="beneficiarios"/>
+          <field name="fondostotales"/>
+          <field name="fondossubvencionados"/>
+          <field name="fondosaportados"/>
+          <field name="fondosgeotermia"/>
+          <field name="inversionreal"/>
+          <field name="otrosimportes"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="subvenciones_otra_form">
+      <field name="name">subvenciones.otra.form</field>
+      <field name="model">subvenciones.otra</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="otra">
+          <group string="Entidad">
+            <field name="tipo"/>
+            <field name="lugar"/>
+            <field name="fecha"/>
+            <field name="institucion"/>
+            <field name="privada"/>
+            <field name="nboletin"/>
+            <field name="nombre"/>
+            <field name="nombreuno"/>
+            <field name="nombredos"/>
+            <field name="beneficiarios" placeholder= "beneficiarios..."/>
+          </group>
+          <group string="Cuantías">
+            <field name="fondostotales"/>
+            <field name="fondossubvencionados"/>
+            <field name="fondosaportados"/>
+            <field name="fondosgeotermia"/>
+            <field name="inversionreal"/>
+            <field name="otrosimportes"/>
+          </group>
+          <newline/>
+          <group string="Resumen" colspan="2" col="1">
+            <field name="resumen"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="subvenciones_otra_action" model="ir.actions.act_window">
+      <field name="name">Otra</field>
+      <field name="res_model">subvenciones.otra</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="subvenciones_otra_action" id="subvenciones_otra_menu" sequence="6" parent="subvenciones_subvenciones_extranjeras"/>
+
+    <record model="ir.ui.view" id="subvenciones_cursos_tree">
+      <field name="name">subvenciones.cursos.tree</field>
+      <field name="model">subvenciones.cursos</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="cursos">
+          <field name="tipo"/>
+          <field name="lugar"/>
+          <field name="fecha"/>
+          <field name="institucion"/>
+          <field name="privada"/>
+          <field name="nboletin"/>
+          <field name="nombre"/>
+          <field name="beneficiarios"/>
+          <field name="fondostotales"/>
+          <field name="fondossubvencionados"/>
+          <field name="fondosaportados"/>
+          <field name="fondosgeotermia"/>
+          <field name="inversionreal"/>
+          <field name="otrosimportes"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="subvenciones_cursos_form">
+      <field name="name">subvenciones.cursos.form</field>
+      <field name="model">subvenciones.cursos</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="cursos">
+          <group string="Entidad">
+            <field name="tipo"/>
+            <field name="lugar"/>
+            <field name="fecha"/>
+            <field name="institucion"/>
+            <field name="privada"/>
+            <field name="nboletin"/>
+            <field name="nombre"/>
+            <field name="nombreuno"/>
+            <field name="nombredos"/>
+            <field name="beneficiarios" placeholder= "beneficiarios..."/>
+          </group>
+          <group string="Cuantías">
+            <field name="fondostotales"/>
+            <field name="fondossubvencionados"/>
+            <field name="fondosaportados"/>
+            <field name="fondosgeotermia"/>
+            <field name="inversionreal"/>
+            <field name="otrosimportes"/>
+          </group>
+          <newline/>
+          <group string="Resumen" colspan="2" col="1">
+            <field name="resumen"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="subvenciones_cursos_action" model="ir.actions.act_window">
+      <field name="name">Cursos</field>
+      <field name="res_model">subvenciones.cursos</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="subvenciones_cursos_action" id="subvenciones_cursos_menu" sequence="7" parent="subvenciones_ayudasybecas"/>
+
+    <record model="ir.ui.view" id="subvenciones_congresos_tree">
+      <field name="name">subvenciones.congresos.tree</field>
+      <field name="model">subvenciones.congresos</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="congresos">
+          <field name="tipo"/>
+          <field name="lugar"/>
+          <field name="fecha"/>
+          <field name="institucion"/>
+          <field name="privada"/>
+          <field name="nboletin"/>
+          <field name="nombre"/>
+          <field name="beneficiarios"/>
+          <field name="fondostotales"/>
+          <field name="fondossubvencionados"/>
+          <field name="fondosaportados"/>
+          <field name="fondosgeotermia"/>
+          <field name="inversionreal"/>
+          <field name="otrosimportes"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="subvenciones_congresos_form">
+      <field name="name">subvenciones.congresos.form</field>
+      <field name="model">subvenciones.congresos</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="congresos">
+          <group string="Entidad">
+            <field name="tipo"/>
+            <field name="lugar"/>
+            <field name="fecha"/>
+            <field name="institucion"/>
+            <field name="privada"/>
+            <field name="nboletin"/>
+            <field name="nombre"/>
+            <field name="nombreuno"/>
+            <field name="nombredos"/>
+            <field name="beneficiarios" placeholder= "beneficiarios..."/>
+          </group>
+          <group string="Cuantías">
+            <field name="fondostotales"/>
+            <field name="fondossubvencionados"/>
+            <field name="fondosaportados"/>
+            <field name="fondosgeotermia"/>
+            <field name="inversionreal"/>
+            <field name="otrosimportes"/>
+          </group>
+          <newline/>
+          <group string="Resumen" colspan="2" col="1">
+            <field name="resumen"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="subvenciones_congresos_action" model="ir.actions.act_window">
+      <field name="name">Congresos</field>
+      <field name="res_model">subvenciones.congresos</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="subvenciones_congresos_action" id="subvenciones_congresos_menu" sequence="8" parent="subvenciones_ayudasybecas"/>
+
+    <record model="ir.ui.view" id="subvenciones_material_tree">
+      <field name="name">subvenciones.material.tree</field>
+      <field name="model">subvenciones.material</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="material">
+          <field name="tipo"/>
+          <field name="lugar"/>
+          <field name="fecha"/>
+          <field name="institucion"/>
+          <field name="privada"/>
+          <field name="nboletin"/>
+          <field name="nombre"/>
+          <field name="beneficiarios"/>
+          <field name="fondostotales"/>
+          <field name="fondossubvencionados"/>
+          <field name="fondosaportados"/>
+          <field name="fondosgeotermia"/>
+          <field name="inversionreal"/>
+          <field name="otrosimportes"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="subvenciones_material_form">
+      <field name="name">subvenciones.material.form</field>
+      <field name="model">subvenciones.material</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="material">
+          <group string="Entidad">
+            <field name="tipo"/>
+            <field name="lugar"/>
+            <field name="fecha"/>
+            <field name="institucion"/>
+            <field name="privada"/>
+            <field name="nboletin"/>
+            <field name="nombre"/>
+            <field name="nombreuno"/>
+            <field name="nombredos"/>
+            <field name="beneficiarios" placeholder= "beneficiarios..."/>
+          </group>
+          <group string="Cuantías">
+            <field name="fondostotales"/>
+            <field name="fondossubvencionados"/>
+            <field name="fondosaportados"/>
+            <field name="fondosgeotermia"/>
+            <field name="inversionreal"/>
+            <field name="otrosimportes"/>
+          </group>
+          <newline/>
+          <group string="Resumen" colspan="2" col="1">
+            <field name="resumen"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="subvenciones_material_action" model="ir.actions.act_window">
+      <field name="name">Material</field>
+      <field name="res_model">subvenciones.material</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="subvenciones_material_action" id="subvenciones_material_menu" sequence="9" parent="subvenciones_ayudasybecas"/>
+
+    <record model="ir.ui.view" id="subvenciones_difusion_tree">
+      <field name="name">subvenciones.difusion.tree</field>
+      <field name="model">subvenciones.difusion</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="difusion">
+          <field name="tipo"/>
+          <field name="lugar"/>
+          <field name="fecha"/>
+          <field name="institucion"/>
+          <field name="privada"/>
+          <field name="nboletin"/>
+          <field name="nombre"/>
+          <field name="beneficiarios"/>
+          <field name="fondostotales"/>
+          <field name="fondossubvencionados"/>
+          <field name="fondosaportados"/>
+          <field name="fondosgeotermia"/>
+          <field name="inversionreal"/>
+          <field name="otrosimportes"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="subvenciones_difusion_form">
+      <field name="name">subvenciones.difusion.form</field>
+      <field name="model">subvenciones.difusion</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="difusion">
+          <group string="Entidad">
+            <field name="tipo"/>
+            <field name="lugar"/>
+            <field name="fecha"/>
+            <field name="institucion"/>
+            <field name="privada"/>
+            <field name="nboletin"/>
+            <field name="nombre"/>
+            <field name="nombreuno"/>
+            <field name="nombredos"/>
+            <field name="beneficiarios" placeholder= "beneficiarios..."/>
+          </group>
+          <group string="Cuantías">
+            <field name="fondostotales"/>
+            <field name="fondossubvencionados"/>
+            <field name="fondosaportados"/>
+            <field name="fondosgeotermia"/>
+            <field name="inversionreal"/>
+            <field name="otrosimportes"/>
+          </group>
+          <newline/>
+          <group string="Resumen" colspan="2" col="1">
+            <field name="resumen"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="subvenciones_difusion_action" model="ir.actions.act_window">
+      <field name="name">Difusion</field>
+      <field name="res_model">subvenciones.difusion</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="subvenciones_difusion_action" id="subvenciones_difusion_menu" sequence="10" parent="subvenciones_ayudasybecas"/>
+
+    <record model="ir.ui.view" id="subvenciones_personal_tree">
+      <field name="name">subvenciones.personal.tree</field>
+      <field name="model">subvenciones.personal</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="personal">
+          <field name="tipo"/>
+          <field name="lugar"/>
+          <field name="fecha"/>
+          <field name="institucion"/>
+          <field name="privada"/>
+          <field name="nboletin"/>
+          <field name="nombre"/>
+          <field name="beneficiarios"/>
+          <field name="fondostotales"/>
+          <field name="fondossubvencionados"/>
+          <field name="fondosaportados"/>
+          <field name="fondosgeotermia"/>
+          <field name="inversionreal"/>
+          <field name="otrosimportes"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="subvenciones_personal_form">
+      <field name="name">subvenciones.personal.form</field>
+      <field name="model">subvenciones.personal</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="personal">
+          <group string="Entidad">
+            <field name="tipo"/>
+            <field name="lugar"/>
+            <field name="fecha"/>
+            <field name="institucion"/>
+            <field name="privada"/>
+            <field name="nboletin"/>
+            <field name="nombre"/>
+            <field name="nombreuno"/>
+            <field name="nombredos"/>
+            <field name="beneficiarios" placeholder= "beneficiarios..."/>
+          </group>
+          <group string="Cuantías">
+            <field name="fondostotales"/>
+            <field name="fondossubvencionados"/>
+            <field name="fondosaportados"/>
+            <field name="fondosgeotermia"/>
+            <field name="inversionreal"/>
+            <field name="otrosimportes"/>
+          </group>
+          <newline/>
+          <group string="Resumen" colspan="2" col="1">
+            <field name="resumen"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="subvenciones_personal_action" model="ir.actions.act_window">
+      <field name="name">Personal</field>
+      <field name="res_model">subvenciones.personal</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="subvenciones_personal_action" id="subvenciones_personal_menu" sequence="11" parent="subvenciones_ayudasybecas"/>
+
+    <record model="ir.ui.view" id="subvenciones_otros_tree">
+      <field name="name">subvenciones.otros.tree</field>
+      <field name="model">subvenciones.otros</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="otros">
+          <field name="tipo"/>
+          <field name="lugar"/>
+          <field name="fecha"/>
+          <field name="institucion"/>
+          <field name="privada"/>
+          <field name="nboletin"/>
+          <field name="nombre"/>
+          <field name="beneficiarios"/>
+          <field name="fondostotales"/>
+          <field name="fondossubvencionados"/>
+          <field name="fondosaportados"/>
+          <field name="fondosgeotermia"/>
+          <field name="inversionreal"/>
+          <field name="otrosimportes"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="subvenciones_otros_form">
+      <field name="name">subvenciones.otros.form</field>
+      <field name="model">subvenciones.otros</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="otros">
+           <group string="Entidad">
+            <field name="tipo"/>
+            <field name="lugar"/>
+            <field name="fecha"/>
+            <field name="institucion"/>
+            <field name="privada"/>
+            <field name="nboletin"/>
+            <field name="nombre"/>
+            <field name="nombreuno"/>
+            <field name="nombredos"/>
+            <field name="beneficiarios" placeholder= "beneficiarios..."/>
+          </group>
+          <group string="Cuantías">
+            <field name="fondostotales"/>
+            <field name="fondossubvencionados"/>
+            <field name="fondosaportados"/>
+            <field name="fondosgeotermia"/>
+            <field name="inversionreal"/>
+            <field name="otrosimportes"/>
+          </group>
+          <newline/>
+          <group string="Resumen" colspan="2" col="1">
+            <field name="resumen"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="subvenciones_otros_action" model="ir.actions.act_window">
+      <field name="name">Otros</field>
+      <field name="res_model">subvenciones.otros</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="subvenciones_otros_action" id="subvenciones_otros_menu" sequence="12" parent="subvenciones_ayudasybecas"/>
+
+    <record model="ir.ui.view" id="subvenciones_pedidas_tree">
+      <field name="name">subvenciones.pedidas.tree</field>
+      <field name="model">subvenciones.pedidas</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="pedidas">
+          <field name="tipo"/>
+          <field name="lugar"/>
+          <field name="fecha"/>
+          <field name="institucion"/>
+          <field name="privada"/>
+          <field name="nboletin"/>
+          <field name="nombre"/>
+          <field name="beneficiarios"/>
+          <field name="fondostotales"/>
+          <field name="fondossubvencionados"/>
+          <field name="fondosaportados"/>
+          <field name="fondosgeotermia"/>
+          <field name="inversionreal"/>
+          <field name="otrosimportes"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="subvenciones_pedidas_form">
+      <field name="name">subvenciones.pedidas.form</field>
+      <field name="model">subvenciones.pedidas</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="pedidas">
+          <group string="Entidad">
+            <field name="tipo"/>
+            <field name="lugar"/>
+            <field name="fecha"/>
+            <field name="institucion"/>
+            <field name="privada"/>
+            <field name="nboletin"/>
+            <field name="nombre"/>
+            <field name="nombreuno"/>
+            <field name="nombredos"/>
+            <field name="beneficiarios" placeholder= "beneficiarios..."/>
+          </group>
+          <group string="Cuantías">
+            <field name="fondostotales"/>
+            <field name="fondossubvencionados"/>
+            <field name="fondosaportados"/>
+            <field name="fondosgeotermia"/>
+            <field name="inversionreal"/>
+            <field name="otrosimportes"/>
+          </group>
+          <newline/>
+          <group string="Resumen" colspan="2" col="1">
+            <field name="resumen"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="subvenciones_pedidas_action" model="ir.actions.act_window">
+      <field name="name">Pedidas</field>
+      <field name="res_model">subvenciones.pedidas</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="subvenciones_pedidas_action" id="subvenciones_pedidas_menu" sequence="13" parent="subvenciones_subvenciones_interes"/>
+
+    <record model="ir.ui.view" id="subvenciones_aceptadaspendientes_tree">
+      <field name="name">subvenciones.aceptadaspendientes.tree</field>
+      <field name="model">subvenciones.aceptadaspendientes</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="aceptadaspendientes">
+          <field name="tipo"/>
+          <field name="lugar"/>
+          <field name="fecha"/>
+          <field name="institucion"/>
+          <field name="privada"/>
+          <field name="nboletin"/>
+          <field name="nombre"/>
+          <field name="beneficiarios"/>
+          <field name="fondostotales"/>
+          <field name="fondossubvencionados"/>
+          <field name="fondosaportados"/>
+          <field name="fondosgeotermia"/>
+          <field name="inversionreal"/>
+          <field name="otrosimportes"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="subvenciones_aceptadaspendientes_form">
+      <field name="name">subvenciones.aceptadaspendientes.form</field>
+      <field name="model">subvenciones.aceptadaspendientes</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="aceptadaspendientes">
+          <group string="Entidad">
+            <field name="tipo"/>
+            <field name="lugar"/>
+            <field name="fecha"/>
+            <field name="institucion"/>
+            <field name="privada"/>
+            <field name="nboletin"/>
+            <field name="nombre"/>
+            <field name="nombreuno"/>
+            <field name="nombredos"/>
+            <field name="beneficiarios" placeholder= "beneficiarios..."/>
+          </group>
+          <group string="Cuantías">
+            <field name="fondostotales"/>
+            <field name="fondossubvencionados"/>
+            <field name="fondosaportados"/>
+            <field name="fondosgeotermia"/>
+            <field name="inversionreal"/>
+            <field name="otrosimportes"/>
+          </group>
+          <newline/>
+          <group string="Resumen" colspan="2" col="1">
+            <field name="resumen"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="subvenciones_aceptadaspendientes_action" model="ir.actions.act_window">
+      <field name="name">Aceptadas pendientes</field>
+      <field name="res_model">subvenciones.aceptadaspendientes</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="subvenciones_aceptadaspendientes_action" id="subvenciones_aceptadaspendientes_menu" sequence="14" parent="subvenciones_subvenciones_interes"/>
+
+    <record model="ir.ui.view" id="subvenciones_recibidas_tree">
+      <field name="name">subvenciones.recibidas.tree</field>
+      <field name="model">subvenciones.recibidas</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="recibidas">
+          <field name="tipo"/>
+          <field name="lugar"/>
+          <field name="fecha"/>
+          <field name="institucion"/>
+          <field name="privada"/>
+          <field name="nboletin"/>
+          <field name="nombre"/>
+          <field name="beneficiarios"/>
+          <field name="fondostotales"/>
+          <field name="fondossubvencionados"/>
+          <field name="fondosaportados"/>
+          <field name="fondosgeotermia"/>
+          <field name="inversionreal"/>
+          <field name="otrosimportes"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="subvenciones_recibidas_form">
+      <field name="name">subvenciones.recibidas.form</field>
+      <field name="model">subvenciones.recibidas</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="recibidas">
+          <group string="Entidad">
+            <field name="lugar"/>
+            <field name="fecha"/>
+            <field name="institucion"/>
+            <field name="privada"/>
+            <field name="nboletin"/>
+            <field name="nombre"/>
+            <field name="nombreuno"/>
+            <field name="nombredos"/>
+            <field name="beneficiarios" placeholder= "beneficiarios..."/>
+          </group>
+          <group string="Cuantías">
+            <field name="fondostotales"/>
+            <field name="fondossubvencionados"/>
+            <field name="fondosaportados"/>
+            <field name="fondosgeotermia"/>
+            <field name="inversionreal"/>
+            <field name="otrosimportes"/>
+          </group>
+          <newline/>
+          <group string="Resumen" colspan="2" col="1">
+            <field name="resumen"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="subvenciones_recibidas_action" model="ir.actions.act_window">
+      <field name="name">Recibidas</field>
+      <field name="res_model">subvenciones.recibidas</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="subvenciones_recibidas_action" id="subvenciones_recibidas_menu" sequence="15" parent="subvenciones_subvenciones_interes"/>
+
+    <record model="ir.ui.view" id="subvenciones_otro_tree">
+      <field name="name">subvenciones.otro.tree</field>
+      <field name="model">subvenciones.otro</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="otro">
+          <field name="tipo"/>
+          <field name="lugar"/>
+          <field name="fecha"/>
+          <field name="institucion"/>
+          <field name="privada"/>
+          <field name="nboletin"/>
+          <field name="nombre"/>
+          <field name="beneficiarios"/>
+          <field name="fondostotales"/>
+          <field name="fondossubvencionados"/>
+          <field name="fondosaportados"/>
+          <field name="fondosgeotermia"/>
+          <field name="inversionreal"/>
+          <field name="otrosimportes"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="subvenciones_otro_form">
+      <field name="name">subvenciones.otro.form</field>
+      <field name="model">subvenciones.otro</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="otro">
+          <group string="Entidad">
+            <field name="tipo"/>
+            <field name="lugar"/>
+            <field name="fecha"/>
+            <field name="institucion"/>
+            <field name="privada"/>
+            <field name="nboletin"/>
+            <field name="nombre"/>
+            <field name="nombreuno"/>
+            <field name="nombredos"/>
+            <field name="beneficiarios" placeholder= "beneficiarios..."/>
+          </group>
+          <group string="Cuantías">
+            <field name="fondostotales"/>
+            <field name="fondossubvencionados"/>
+            <field name="fondosaportados"/>
+            <field name="fondosgeotermia"/>
+            <field name="inversionreal"/>
+            <field name="otrosimportes"/>
+          </group>
+          <newline/>
+          <group string="Resumen" colspan="2" col="1">
+            <field name="resumen"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="subvenciones_otro_action" model="ir.actions.act_window">
+      <field name="name">otro</field>
+      <field name="res_model">subvenciones.otro</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="subvenciones_otro_action" id="subvenciones_otro_menu" sequence="16" parent="subvenciones_subvenciones_interes"/>
+  </data>
+</openerp>

@@ -1,0 +1,1111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+  <data>
+    <menuitem name="Asociados" id="asociados" sequence="90"/>
+    <menuitem name="Organización" id="asociados_organizacion" parent="asociados"/>
+    <menuitem name="Información" id="asociados_informacion" parent="asociados"/>
+    <menuitem name="Contacto" id="asociados_contacto" parent="asociados" />
+    <menuitem name="Sello calidad instaladores" id="asociados_selloinstaladores" parent="asociados" />
+    <menuitem name="Sello calidad perforación" id="asociados_selloperforacion" parent="asociados" />
+
+    <record model="ir.ui.view" id="custom_juntadirectiva_kanban_view">
+            <field name="name">asociados.juntadirectiva.kanban</field>
+            <field name="model">asociados.juntadirectiva</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--list of field to be loaded -->
+                    <field name="cargo" />
+                    <field name="image" />
+                    <templates>
+                    <t t-name="kanban-box">
+                            <div class="oe_product_vignette">
+                                <a type="open">
+                                    <img class="oe_kanban_image"
+                                        t-att-src="kanban_image('asociados.juntadirectiva', 'image', record.id.value)" />
+                                </a>
+                                <div class="oe_product_desc">
+                                    <h4>
+                                        <a type="edit">
+                                            <field name="cargo"></field>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li><field name="nombre"></field> </li>
+                                        <li><field name="empresa"></field>  </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+    </record>
+    <record model="ir.ui.view" id="asociados_juntadirectiva_tree">
+      <field name="name">asociados.juntadirectiva.tree</field>
+      <field name="model">asociados.juntadirectiva</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="juntadirectiva">
+          <field name="cargo"/>
+          <field name="nombre"/>
+          <field name="empresa"/>
+          <field name="telefonoempresa"/>
+          <field name="movil"/>
+          <field name="email"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="asociados_juntadirectiva_form">
+      <field name="name">asociados.juntadirectiva.form</field>
+      <field name="model">asociados.juntadirectiva</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="juntadirectiva">
+          <group string="Ficha">
+            <field name="image" widget='image' />
+            <field name="cargo"/>
+            <field name="nombre"/>
+            <field name="empresa"/>
+          </group>
+          <group>
+          <field name="telefonoempresa"/>
+          <field name="movil"/>
+          <field name="email"/>
+          </group>
+          <newline/>
+          <group colspan="2" col="1">
+          <field name="informacion" placeholder= "información adicional..."/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="asociados_juntadirectiva_action" model="ir.actions.act_window">
+      <field name="name">Junta directiva</field>
+      <field name="res_model">asociados.juntadirectiva</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem action="asociados_juntadirectiva_action" id="asociados_juntadirectiva_menu" sequence="1" parent="asociados_organizacion"/>
+
+    <record model="ir.ui.view" id="custom_grupos_kanban_view">
+            <field name="name">asociados.grupos.kanban</field>
+            <field name="model">asociados.grupos</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--list of field to be loaded -->
+                    <field name="name" />
+                    <field name="image" />
+                    <templates>
+                    <t t-name="kanban-box">
+                            <div class="oe_product_vignette">
+                                <a type="open">
+                                    <img class="oe_kanban_image"
+                                        t-att-src="kanban_image('asociados.grupos', 'image', record.id.value)" />
+                                </a>
+                                <div class="oe_product_desc">
+                                    <h4>
+                                        <a type="edit">
+                                            <field name="name"></field>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li><field name="coordinador"></field> </li>
+                                        <li><field name="telefono"></field>  </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+    </record>
+    <record model="ir.ui.view" id="asociados_grupos_tree">
+      <field name="name">asociados.grupos.tree</field>
+      <field name="model">asociados.grupos</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="grupos">
+          <field name="name"/>
+          <field name="coordinador"/>
+          <field name="telefono"/>
+          <field name="correo"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="asociados_grupos_form">
+      <field name="name">asociados.grupos.form</field>
+      <field name="model">asociados.grupos</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="grupos">
+          <group string="Ficha">
+            <field name="image" widget='image' />
+            <field name="name"/>
+            <field name="coordinador"/>
+          </group>
+          <group>
+            <field name="telefono"/>
+            <field name="correo"/>
+          </group>
+        <newline/>
+          <group colspan="2" col="1">
+          <field name="miembrosdelgrupo_id"/>
+          </group>
+        <newline/>
+          <group colspan="2" col="1">
+          <field name="informacion" placeholder= "reuniones, decisiones,más información,etc..."/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="asociados_grupos_action" model="ir.actions.act_window">
+      <field name="name">Grupos de trabajo</field>
+      <field name="res_model">asociados.grupos</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem action="asociados_grupos_action" id="asociados_grupos_menu" sequence="2" parent="asociados_organizacion"/>
+
+    <record model="ir.ui.view" id="asociados_miembrosgt_tree">
+      <field name="name">asociados.miembrosgt.tree</field>
+      <field name="model">asociados.miembrosgt</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="miembrosgt">
+          <field name="nombre"/>
+          <field name="empresa"/>
+          <field name="telefonoempresa"/>
+          <field name="movil"/>
+          <field name="email"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="asociados_miembrosgt_form">
+      <field name="name">asociados.miembrosgt.form</field>
+      <field name="model">asociados.miembrosgt</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="miembrosgt">
+          <group string="Miembro de grupo">
+            <field name="image" widget='image' />
+            <field name="name_id"/>
+            <field name="nombre"/>
+            <field name="empresa"/>
+          </group>
+          <group>
+          <field name="telefonoempresa"/>
+          <field name="movil"/>
+          <field name="email"/>
+          </group>
+          <newline/>
+          <group colspan="2" col="1">
+          <field name="informacion" placeholder= "información adicional..."/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="custom_module_kanban_view">
+            <field name="name">asociados.lista.kanban</field>
+            <field name="model">asociados.lista</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--list of field to be loaded -->
+                    <field name="nombrecliente" />
+                    <field name="image" />
+                    <templates>
+                    <t t-name="kanban-box">
+                            <div class="oe_product_vignette">
+                                <a type="open">
+                                    <img class="oe_kanban_image"
+                                        t-att-src="kanban_image('asociados.lista', 'image', record.id.value)" />
+                                </a>
+                                <div class="oe_product_desc">
+                                    <h4>
+                                        <a type="edit">
+                                            <field name="nombrecliente"></field>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li><field name="email"></field> </li>
+                                        <li><field name="web"></field>  </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+    </record>
+    <record model="ir.ui.view" id="asociados_lista_tree">
+      <field name="name">asociados.lista.tree</field>
+      <field name="model">asociados.lista</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="lista">
+          <field name="nombrecliente"/>
+          <field name="codigo"/>
+          <field name="numero"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="cif"/>
+          <field name="telefono"/>
+          <field name="fax"/>
+          <field name="email"/>
+          <field name="contacto"/>
+          <field name="web"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="asociados_lista_form">
+      <field name="name">asociados.lista.form</field>
+      <field name="model">asociados.lista</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="lista">
+          <group string="Datos">
+            <field name="image" widget='image' />
+            <field name="nombrecliente"/>
+            <field name="codigo"/>
+            <field name="numero"/>
+            <field name="direccion"/>
+            <field name="cp"/>
+            <field name="poblacion"/>
+            <field name="provincia"/>
+            <field name="cif"/>
+            <field name="telefono"/>
+            <field name="fax"/>
+            <field name="email"/>
+            <field name="contacto"/>
+            <field name="web"/>
+          </group>
+          <group string="Sello de calidad">
+            <notebook colspan="2">
+              <page string="Instaladores">
+                <group colspan="2" col="1">
+                  <field name="altaensello_id"/>
+                  <field name="concesionsello_id"/>
+                  <field name="denegadas_id"/>
+                </group>
+              </page>
+              <page string="Perforación">
+                <group colspan="2" col="1">
+                  <field name="altaenselloper_id"/>
+                  <field name="concesionselloper_id"/>
+                  <field name="denegadasper_id"/>
+                </group>
+              </page>
+            </notebook>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="asociados_lista_action" model="ir.actions.act_window">
+      <field name="name">Lista asociados</field>
+      <field name="res_model">asociados.lista</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem action="asociados_lista_action" id="asociados_lista_menu" sequence="4" parent="asociados_informacion"/>
+
+    <record model="ir.ui.view" id="asociados_clasificacion_tree">
+      <field name="name">asociados.clasificacion.tree</field>
+      <field name="model">asociados.clasificacion</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="clasificacion">
+          <field name="nombre"/>
+          <field name="distribuidora"/>
+          <field name="ingenieria"/>
+          <field name="instaladora"/>
+          <field name="sondeos"/>
+          <field name="institucionales"/>
+          <field name="arquitectura"/>
+          <field name="otrasactividades"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="asociados_clasificacion_form">
+      <field name="name">asociados.clasificacion.form</field>
+      <field name="model">asociados.clasificacion</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="clasificacion">
+          <field name="nombre"/>
+          <field name="distribuidora"/>
+          <field name="ingenieria"/>
+          <field name="instaladora"/>
+          <field name="sondeos"/>
+          <field name="institucionales"/>
+          <field name="arquitectura"/>
+          <newline/>
+          <group colspan="2" col="1">
+            <field name="otrasactividades" placeholder= "Otras actividades..."/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="asociados_clasificacion_action" model="ir.actions.act_window">
+      <field name="name">Clasificacion empresas</field>
+      <field name="res_model">asociados.clasificacion</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="asociados_clasificacion_action" id="asociados_clasificacion_menu" sequence="5" parent="asociados_informacion"/>
+
+    <record model="ir.ui.view" id="asociados_altas_tree">
+      <field name="name">asociados.altas.tree</field>
+      <field name="model">asociados.altas</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="altas">
+          <field name="nombrecliente"/>
+          <field name="codigo"/>
+          <field name="numero"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="cif"/>
+          <field name="telefono"/>
+          <field name="fax"/>
+          <field name="email"/>
+          <field name="contacto"/>
+          <field name="web"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="asociados_altas_form">
+      <field name="name">asociados.altas.form</field>
+      <field name="model">asociados.altas</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="altas">
+          <field name="nombrecliente"/>
+          <field name="codigo"/>
+          <field name="numero"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="cif"/>
+          <field name="telefono"/>
+          <field name="fax"/>
+          <field name="email"/>
+          <field name="contacto"/>
+          <field name="web"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="asociados_altas_action" model="ir.actions.act_window">
+      <field name="name">Altas</field>
+      <field name="res_model">asociados.altas</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="asociados_altas_action" id="asociados_altas_menu" sequence="6" parent="asociados_informacion"/>
+
+    <record model="ir.ui.view" id="asociados_bajas_tree">
+      <field name="name">asociados.bajas.tree</field>
+      <field name="model">asociados.bajas</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="bajas">
+          <field name="nombrecliente"/>
+          <field name="codigo"/>
+          <field name="numero"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="cif"/>
+          <field name="telefono"/>
+          <field name="fax"/>
+          <field name="email"/>
+          <field name="contacto"/>
+          <field name="web"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="asociados_bajas_form">
+      <field name="name">asociados.bajas.form</field>
+      <field name="model">asociados.bajas</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="bajas">
+          <field name="nombrecliente"/>
+          <field name="codigo"/>
+          <field name="numero"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="cif"/>
+          <field name="telefono"/>
+          <field name="fax"/>
+          <field name="email"/>
+          <field name="contacto"/>
+          <field name="web"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="asociados_bajas_action" model="ir.actions.act_window">
+      <field name="name">Bajas</field>
+      <field name="res_model">asociados.bajas</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="asociados_bajas_action" id="asociados_bajas_menu" sequence="7" parent="asociados_informacion"/>
+
+    <record model="ir.ui.view" id="asociados_variaciones_tree">
+      <field name="name">asociados.variaciones.tree</field>
+      <field name="model">asociados.variaciones</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="variaciones">
+          <field name="nombrecliente"/>
+          <field name="codigo"/>
+          <field name="numero"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="cif"/>
+          <field name="telefono"/>
+          <field name="fax"/>
+          <field name="email"/>
+          <field name="contacto"/>
+          <field name="web"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="asociados_variaciones_form">
+      <field name="name">asociados.variaciones.form</field>
+      <field name="model">asociados.variaciones</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="variaciones">
+          <field name="nombrecliente"/>
+          <field name="codigo"/>
+          <field name="numero"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="cif"/>
+          <field name="telefono"/>
+          <field name="fax"/>
+          <field name="email"/>
+          <field name="contacto"/>
+          <field name="web"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="asociados_variaciones_action" model="ir.actions.act_window">
+      <field name="name">Variaciones</field>
+      <field name="res_model">asociados.variaciones</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="asociados_variaciones_action" id="asociados_variaciones_menu" sequence="8" parent="asociados_informacion"/>
+
+    <record model="ir.ui.view" id="asociados_otros_tree">
+      <field name="name">asociados.otros.tree</field>
+      <field name="model">asociados.otros</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="otros">
+          <field name="nombrecliente"/>
+          <field name="codigo"/>
+          <field name="numero"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="cif"/>
+          <field name="telefono"/>
+          <field name="fax"/>
+          <field name="email"/>
+          <field name="contacto"/>
+          <field name="web"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="asociados_otros_form">
+      <field name="name">asociados.otros.form</field>
+      <field name="model">asociados.otros</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="otros">
+          <field name="nombrecliente"/>
+          <field name="codigo"/>
+          <field name="numero"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="cif"/>
+          <field name="telefono"/>
+          <field name="fax"/>
+          <field name="email"/>
+          <field name="contacto"/>
+          <field name="web"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="asociados_otros_action" model="ir.actions.act_window">
+      <field name="name">Otros</field>
+      <field name="res_model">asociados.otros</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="asociados_otros_action" id="asociados_otros_menu" sequence="9" parent="asociados_informacion"/>
+
+    <record model="ir.ui.view" id="asociados_ingenierias_tree">
+      <field name="name">asociados.ingenierias.tree</field>
+      <field name="model">asociados.ingenierias</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="ingenierias">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="asociados_ingenierias_form">
+      <field name="name">asociados.ingenierias.form</field>
+      <field name="model">asociados.ingenierias</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="ingenierias">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="asociados_ingenierias_action" model="ir.actions.act_window">
+      <field name="name">Ingenierias</field>
+      <field name="res_model">asociados.ingenierias</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="asociados_ingenierias_action" id="asociados_ingenierias_menu" sequence="10" parent="asociados_contacto"/>
+
+    <record model="ir.ui.view" id="asociados_instaladoras_tree">
+      <field name="name">asociados.instaladoras.tree</field>
+      <field name="model">asociados.instaladoras</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="instaladoras">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="asociados_instaladoras_form">
+      <field name="name">asociados.instaladoras.form</field>
+      <field name="model">asociados.instaladoras</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="instaladoras">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="asociados_instaladoras_action" model="ir.actions.act_window">
+      <field name="name">Instaladoras</field>
+      <field name="res_model">asociados.instaladoras</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="asociados_instaladoras_action" id="asociados_instaladoras_menu" sequence="11" parent="asociados_contacto"/>
+
+    <record model="ir.ui.view" id="asociados_sondeos_tree">
+      <field name="name">asociados.sondeos.tree</field>
+      <field name="model">asociados.sondeos</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="sondeos">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="asociados_sondeos_form">
+      <field name="name">asociados.sondeos.form</field>
+      <field name="model">asociados.sondeos</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="sondeos">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="asociados_sondeos_action" model="ir.actions.act_window">
+      <field name="name">Sondeos</field>
+      <field name="res_model">asociados.sondeos</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="asociados_sondeos_action" id="asociados_sondeos_menu" sequence="12" parent="asociados_contacto"/>
+
+    <record model="ir.ui.view" id="asociados_distribuidoras_tree">
+      <field name="name">asociados.distribuidoras.tree</field>
+      <field name="model">asociados.distribuidoras</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="distribuidoras">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="asociados_distribuidoras_form">
+      <field name="name">asociados.distribuidoras.form</field>
+      <field name="model">asociados.distribuidoras</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="distribuidoras">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="asociados_distribuidoras_action" model="ir.actions.act_window">
+      <field name="name">Distribuidoras</field>
+      <field name="res_model">asociados.distribuidoras</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="asociados_distribuidoras_action" id="asociados_distribuidoras_menu" sequence="13" parent="asociados_contacto"/>
+
+    <record model="ir.ui.view" id="asociados_arquitectura_tree">
+      <field name="name">asociados.arquitectura.tree</field>
+      <field name="model">asociados.arquitectura</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="arquitectura">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="asociados_arquitectura_form">
+      <field name="name">asociados.arquitectura.form</field>
+      <field name="model">asociados.arquitectura</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="arquitectura">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="asociados_arquitectura_action" model="ir.actions.act_window">
+      <field name="name">Arquitectura</field>
+      <field name="res_model">asociados.arquitectura</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="asociados_arquitectura_action" id="asociados_arquitectura_menu" sequence="14" parent="asociados_contacto"/>
+
+    <record model="ir.ui.view" id="asociados_otras_tree">
+      <field name="name">asociados.otras.tree</field>
+      <field name="model">asociados.otras</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="otras">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="asociados_otras_form">
+      <field name="name">asociados.otras.form</field>
+      <field name="model">asociados.otras</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="otras">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="asociados_otras_action" model="ir.actions.act_window">
+      <field name="name">Otras</field>
+      <field name="res_model">asociados.otras</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="asociados_otras_action" id="asociados_otras_menu" sequence="15" parent="asociados_contacto"/>
+
+    <record model="ir.ui.view" id="asociados_altaensello_tree">
+      <field name="name">asociados.altaensello.tree</field>
+      <field name="model">asociados.altaensello</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="altaensello">
+          <field name="name"/>
+          <field name="fechaentrada"/>
+          <field name="lugarauditoria"/>
+          <field name="fechaauditoria"/>
+          <field name="aprobada"/>
+          <field name="observaciones"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="asociados_altaensello_form">
+      <field name="name">asociados.altaensello.form</field>
+      <field name="model">asociados.altaensello</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="altaensello">
+          <field name="name"/>
+          <field name="fechaentrada"/>
+          <field name="lugarauditoria"/>
+          <field name="fechaauditoria"/>
+          <field name="aprobada"/>
+          <field name="observaciones"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="asociados_altaensello_action" model="ir.actions.act_window">
+      <field name="name">Alta en sello</field>
+      <field name="res_model">asociados.altaensello</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="asociados_altaensello_action" id="asociados_altaensello_menu" sequence="16" parent="asociados_selloinstaladores"/>
+
+    <record model="ir.ui.view" id="asociados_concesionsello_tree">
+      <field name="name">asociados.concesionsello.tree</field>
+      <field name="model">asociados.concesionsello</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="concesionsello">
+          <field name="name"/>
+          <field name="empresa"/>
+          <field name="fecha"/>
+          <field name="observaciones"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="asociados_concesionsello_form">
+      <field name="name">asociados.concesionsello.form</field>
+      <field name="model">asociados.concesionsello</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="concesionsello">
+          <field name="name"/>
+          <field name="empresa"/>
+          <field name="fecha"/>
+          <field name="observaciones"/> 
+        </form>
+      </field>
+    </record>
+
+    <record id="asociados_concesionsello_action" model="ir.actions.act_window">
+      <field name="name">Concesion sello</field>
+      <field name="res_model">asociados.concesionsello</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="asociados_concesionsello_action" id="asociados_concesionsello_menu" sequence="17" parent="asociados_selloinstaladores"/>
+
+    <record model="ir.ui.view" id="asociados_denegadas_tree">
+      <field name="name">asociados.denegadas.tree</field>
+      <field name="model">asociados.denegadas</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="denegadas">
+          <field name="name"/>
+          <field name="empresa"/>
+          <field name="pendienterevision"/>
+          <field name="plazo"/>
+          <field name="observaciones"/> 
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="asociados_denegadas_form">
+      <field name="name">asociados.denegadas.form</field>
+      <field name="model">asociados.denegadas</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="denegadas">
+          <field name="name"/>
+          <field name="empresa"/>
+          <field name="pendienterevision"/>
+          <field name="plazo"/>
+          <field name="observaciones"/> 
+        </form>
+      </field>
+    </record>
+
+    <record id="asociados_denegadas_action" model="ir.actions.act_window">
+      <field name="name">Denegadas</field>
+      <field name="res_model">asociados.denegadas</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="asociados_denegadas_action" id="asociados_denegadas_menu" sequence="18" parent="asociados_selloinstaladores"/>
+
+    <record model="ir.ui.view" id="asociados_altaenselloper_tree">
+      <field name="name">asociados.altaenselloper.tree</field>
+      <field name="model">asociados.altaenselloper</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="altaenselloper">
+          <field name="name"/>
+          <field name="fechaentrada"/>
+          <field name="lugarauditoria"/>
+          <field name="fechaauditoria"/>
+          <field name="aprobada"/>
+          <field name="observaciones"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="asociados_altaenselloper_form">
+      <field name="name">asociados.altaenselloper.form</field>
+      <field name="model">asociados.altaenselloper</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="altaenselloper">
+          <field name="name"/>
+          <field name="fechaentrada"/>
+          <field name="lugarauditoria"/>
+          <field name="fechaauditoria"/>
+          <field name="aprobada"/>
+          <field name="observaciones"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="asociados_altaenselloper_action" model="ir.actions.act_window">
+      <field name="name">Alta en sello</field>
+      <field name="res_model">asociados.altaenselloper</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="asociados_altaenselloper_action" id="asociados_altaenselloper_menu" sequence="19" parent="asociados_selloperforacion"/>
+
+    <record model="ir.ui.view" id="asociados_concesionselloper_tree">
+      <field name="name">asociados.concesionselloper.tree</field>
+      <field name="model">asociados.concesionselloper</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="concesionselloper">
+          <field name="name"/>
+          <field name="empresa"/>
+          <field name="fecha"/>
+          <field name="observaciones"/> 
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="asociados_concesionselloper_form">
+      <field name="name">asociados.concesionselloper.form</field>
+      <field name="model">asociados.concesionselloper</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="concesionselloper">
+          <field name="name"/>
+          <field name="empresa"/>
+          <field name="fecha"/>
+          <field name="observaciones"/> 
+        </form>
+      </field>
+    </record>
+
+    <record id="asociados_concesionselloper_action" model="ir.actions.act_window">
+      <field name="name">Concesion sello</field>
+      <field name="res_model">asociados.concesionselloper</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="asociados_concesionselloper_action" id="asociados_concesionselloper_menu" sequence="20" parent="asociados_selloperforacion"/>
+
+    <record model="ir.ui.view" id="asociados_denegadasper_tree">
+      <field name="name">asociados.denegadasper.tree</field>
+      <field name="model">asociados.denegadasper</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="denegadasper">
+          <field name="name"/>
+          <field name="empresa"/>
+          <field name="pendienterevision"/>
+          <field name="plazo"/>
+          <field name="observaciones"/> 
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="asociados_denegadasper_form">
+      <field name="name">asociados.denegadasper.form</field>
+      <field name="model">asociados.denegadasper</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="denegadasper">
+          <field name="name"/>
+          <field name="empresa"/>
+          <field name="pendienterevision"/>
+          <field name="plazo"/>
+          <field name="observaciones"/> 
+        </form>
+      </field>
+    </record>
+
+    <record id="asociados_denegadasper_action" model="ir.actions.act_window">
+      <field name="name">Denegadas</field>
+      <field name="res_model">asociados.denegadasper</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="asociados_denegadasper_action" id="asociados_denegadasper_menu" sequence="21" parent="asociados_selloperforacion"/>
+  </data>
+</openerp>

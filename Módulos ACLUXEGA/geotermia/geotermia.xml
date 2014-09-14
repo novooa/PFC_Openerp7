@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+  <data>
+    <menuitem name="Geotermia" id="geotermia" sequence="90"/>
+    <menuitem name="Alertas de correo" id="geotermia_alertasdecorreo" parent="geotermia"/>
+    <menuitem name="Preguntas técnicas" id="geotermia_preguntastecnicas" parent="geotermia"/>
+    <menuitem name="Comunicación y promoción" id="geotermia_comunicacion" parent="geotermia"/>
+
+     <record model="ir.ui.view" id="custom_alertas_kanban_view">
+            <field name="name">geotermia.alertas.kanban</field>
+            <field name="model">geotermia.alertas</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--list of field to be loaded -->
+                    <field name="comunidad" />
+                    <field name="image" />
+                    <templates>
+                    <t t-name="kanban-box">
+                            <div class="oe_product_vignette">
+                                <a type="open">
+                                    <img class="oe_kanban_image"
+                                        t-att-src="kanban_image('geotermia.alertas', 'image', record.id.value)" />
+                                </a>
+                                <div class="oe_product_desc">
+                                    <h4>
+                                        <a type="edit">
+                                            <field name="comunidad"></field>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li><field name="permite"></field> </li>
+                                        <li><field name="permitealertas"></field>  </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+    </record>
+
+    <record model="ir.ui.view" id="geotermia_alertas_tree">
+      <field name="name">geotermia.alertas.tree</field>
+      <field name="model">geotermia.alertas</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="alertas">
+          <field name="comunidad"/>
+          <field name="permite"/>
+          <field name="permitealertas"/>
+          <field name="llegan"/>
+          <field name="alertasempleadas"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="geotermia_alertas_form">
+      <field name="name">geotermia.alertas.form</field>
+      <field name="model">geotermia.alertas</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="alertas">
+          <group>
+            <field name="image" widget='image' />
+            <field name="comunidad"/>
+            <field name="permite"/>
+            <field name="permitealertas"/>
+            <field name="llegan"/>
+          </group>
+          <group string="Empleadas" colspan="2" col="1">
+            <field name="alertasempleadas"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="geotermia_alertas_action" model="ir.actions.act_window">
+      <field name="name">Alertas</field>
+      <field name="res_model">geotermia.alertas</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem action="geotermia_alertas_action" id="geotermia_alertas_menu" sequence="6" parent="geotermia_alertasdecorreo"/>
+
+    <record model="ir.ui.view" id="geotermia_alertasenviadas_tree">
+      <field name="name">geotermia.alertasenviadas.tree</field>
+      <field name="model">geotermia.alertasenviadas</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="alertasenviadas">
+          <field name="tipo"/>
+          <field name="ficha" widget='url'/>
+          <field name="abrir"/>
+          <field name="titulo"/>
+          <field name="informacion"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="geotermia_alertasenviadas_form">
+      <field name="name">geotermia.alertasenviadas.form</field>
+      <field name="model">geotermia.alertasenviadas</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="alertasenviadas">
+          <group>
+            <field name="tipo" placeholder= "anuncio,licitación,obra..."/>
+            <field name="ficha" />
+            <field name="abrir" placeholder= "indicar pdf,word..."/>
+          </group>
+          <newline/>
+          <group string="Información" colspan="2" col="1">
+            <field name="titulo"/>
+            <field name="informacion"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="geotermia_alertasenviadas_action" model="ir.actions.act_window">
+      <field name="name">Alertas enviadas</field>
+      <field name="res_model">geotermia.alertasenviadas</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="geotermia_alertasenviadas_action" id="geotermia_alertasenviadas_menu" sequence="7" parent="geotermia_alertasdecorreo"/>
+
+    <record model="ir.ui.view" id="geotermia_preguntasyrespuestas_tree">
+      <field name="name">geotermia.preguntasyrespuestas.tree</field>
+      <field name="model">geotermia.preguntasyrespuestas</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="preguntasyrespuestas">
+          <field name="fecha"/>
+          <field name="autorpreg"/>
+          <field name="autorresp"/>
+          <field name="pregunta"/>
+          <field name="respuesta"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="geotermia_preguntasyrespuestas_form">
+      <field name="name">geotermia.preguntasyrespuestas.form</field>
+      <field name="model">geotermia.preguntasyrespuestas</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="preguntasyrespuestas">
+          <field name="fecha"/>
+          <field name="autorpreg"/>
+          <field name="autorresp"/>
+          <newline/>
+            <notebook colspan="2">
+              <page string="Pregunta">
+                <group colspan="2" col="1">
+                  <field name="pregunta" placeholder= "Pregunta...."/>
+                </group>
+              </page>
+              <page string="Respuesta">
+                <group colspan="2" col="1">
+                  <field name="respuesta" placeholder= "Respuesta..."/>
+                </group>
+              </page>
+            </notebook>
+        </form>
+      </field>
+    </record>
+
+    <record id="geotermia_preguntasyrespuestas_action" model="ir.actions.act_window">
+      <field name="name">Preguntas y respuestas</field>
+      <field name="res_model">geotermia.preguntasyrespuestas</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="geotermia_preguntasyrespuestas_action" id="geotermia_preguntasyrespuestas_menu" sequence="9" parent="geotermia_preguntastecnicas"/>
+
+    <record model="ir.ui.view" id="custom_medios_kanban_view">
+            <field name="name">geotermia.medios.kanban</field>
+            <field name="model">geotermia.medios</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--list of field to be loaded -->
+                    <field name="medio" />
+                    <field name="image" />
+                    <templates>
+                    <t t-name="kanban-box">
+                            <div class="oe_product_vignette">
+                                <a type="open">
+                                    <img class="oe_kanban_image"
+                                        t-att-src="kanban_image('geotermia.medios', 'image', record.id.value)" />
+                                </a>
+                                <div class="oe_product_desc">
+                                    <h4>
+                                        <a type="edit">
+                                            <field name="medio"></field>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li><field name="web"></field> </li>
+                                        <li><field name="contacto"></field>  </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+    </record>
+    <record model="ir.ui.view" id="geotermia_medios_tree">
+      <field name="name">geotermia.medios.tree</field>
+      <field name="model">geotermia.medios</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="medios">
+          <field name="medio"/>
+          <field name="web"/>
+          <field name="galicia"/>
+          <field name="estatal"/>
+          <field name="estranjero"/>
+          <field name="especializados"/>
+          <field name="online"/>
+          <field name="contacto"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="geotermia_medios_form">
+      <field name="name">geotermia.medios.form</field>
+      <field name="model">geotermia.medios</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="medios">
+          <group>
+            <field name="image" widget='image' />
+            <field name="medio"/>
+            <field name="web"/>
+          </group>
+          <group>
+            <field name="galicia"/>
+            <field name="estranjero"/>
+            <field name="especializados"/>
+            <field name="online"/>
+            <field name="contacto"/>
+          </group>
+          <newline/>
+          <group colspan="2" col="1">
+            <field name="informacion" placeholder= "información adicional..."/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="geotermia_medios_action" model="ir.actions.act_window">
+      <field name="name">Medios</field>
+      <field name="res_model">geotermia.medios</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem action="geotermia_medios_action" id="geotermia_medios_menu" sequence="10" parent="geotermia_comunicacion"/>
+
+    <record model="ir.ui.view" id="geotermia_contactos_tree">
+      <field name="name">geotermia.contactos.tree</field>
+      <field name="model">geotermia.contactos</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="contactos">
+          <field name="name"/>
+          <field name="medio"/>
+          <field name="email"/>
+          <field name="telefono"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="geotermia_contactos_form">
+      <field name="name">geotermia.contactos.form</field>
+      <field name="model">geotermia.contactos</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="contactos">
+          <field name="name"/>
+          <field name="medio"/>
+          <field name="email"/>
+          <field name="telefono"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="geotermia_contactos_action" model="ir.actions.act_window">
+      <field name="name">Contactos</field>
+      <field name="res_model">geotermia.contactos</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="geotermia_contactos_action" id="geotermia_contactos_menu" sequence="11" parent="geotermia_comunicacion"/>
+
+    <record model="ir.ui.view" id="geotermia_webpropia_tree">
+      <field name="name">geotermia.webpropia.tree</field>
+      <field name="model">geotermia.webpropia</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="webpropia">
+          <field name="titulo"/>
+          <field name="enlace"/>
+          <field name="informacion"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="geotermia_webpropia_form">
+      <field name="name">geotermia.webpropia.form</field>
+      <field name="model">geotermia.webpropia</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="webpropia">
+          <group>
+          <field name="titulo"/>
+          <field name="image" widget='image' />
+          <field name="enlace"/>
+          </group>
+          <newline/>
+          <group colspan="2" col="1">
+            <field name="informacion" placeholder= "Publicación o resumen..."/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="geotermia_webpropia_action" model="ir.actions.act_window">
+      <field name="name">Web propia</field>
+      <field name="res_model">geotermia.webpropia</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="geotermia_webpropia_action" id="geotermia_webpropia_menu" sequence="12" parent="geotermia_comunicacion"/>
+
+    <record model="ir.ui.view" id="geotermia_publicidad_tree">
+      <field name="name">geotermia.publicidad.tree</field>
+      <field name="model">geotermia.publicidad</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="publicidad">
+          <field name="fecha"/>
+          <field name="medio"/>
+          <field name="enlace"/>
+          <field name="informacion"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="geotermia_publicidad_form">
+      <field name="name">geotermia.publicidad.form</field>
+      <field name="model">geotermia.publicidad</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="publicidad">
+          <field name="fecha"/>
+          <field name="medio"/>
+          <field name="enlace"/>
+          <newline/>
+            <notebook colspan="2">
+              <page string="Presupuesto">
+                <group colspan="2" col="1">
+                  <field name="presupuesto" placeholder= "Precios y gastos previstos..."/>
+                </group>
+              </page>
+              <page string="Contenido">
+                <group colspan="2" col="1">
+                  <field name="informacion" placeholder= "Contenido de la publicidad"/>
+                </group>
+              </page>
+            </notebook>
+          <newline/>
+          <group colspan="6" col="1">
+            <field name="image1" widget='image' />
+            <field name="image2" widget='image' />
+            <field name="image2" widget='image' />
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="geotermia_publicidad_action" model="ir.actions.act_window">
+      <field name="name">Publicidad</field>
+      <field name="res_model">geotermia.publicidad</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="geotermia_publicidad_action" id="geotermia_publicidad_menu" sequence="13" parent="geotermia_comunicacion"/>
+
+    <record model="ir.ui.view" id="geotermia_noticiasgen_tree">
+      <field name="name">geotermia.noticiasgen.tree</field>
+      <field name="model">geotermia.noticiasgen</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="noticiasgen">
+          <field name="fecha"/>
+          <field name="medio"/>
+          <field name="enlace"/>
+          <field name="informacion"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="geotermia_noticiasgen_form">
+      <field name="name">geotermia.noticiasgen.form</field>
+      <field name="model">geotermia.noticiasgen</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="noticiasgen">
+          <field name="fecha"/>
+          <field name="medio"/>
+          <field name="enlace"/>
+          <newline/>
+          <group colspan="2" col="1">
+            <field name="informacion" placeholder= "Publicación o resumen..."/>
+          </group>
+          <newline/>
+          <group colspan="6" col="1">
+            <field name="image1" widget='image' />
+            <field name="image2" widget='image' />
+            <field name="image2" widget='image' />
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="geotermia_noticiasgen_action" model="ir.actions.act_window">
+      <field name="name">Noticias generadas</field>
+      <field name="res_model">geotermia.noticiasgen</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="geotermia_noticiasgen_action" id="geotermia_noticiasgen_menu" sequence="14" parent="geotermia_comunicacion"/>
+
+    <record model="ir.ui.view" id="geotermia_imagenes_tree">
+      <field name="name">geotermia.imagenes.tree</field>
+      <field name="model">geotermia.imagenes</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="imagenes">
+          <field name="evento"/>
+          <field name="fecha"/>
+          <field name="informacion"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="geotermia_imagenes_form">
+      <field name="name">geotermia.imagenes.form</field>
+      <field name="model">geotermia.imagenes</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="imagenes">
+          <field name="evento"/>
+          <field name="fecha"/>
+          <newline/>
+          <group colspan="2" col="1">
+            <field name="informacion" placeholder= "Publicación o resumen..."/>
+          </group>
+          <newline/>
+          <group colspan="20" col="1">
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+            <field name="image" widget='image' />
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="geotermia_imagenes_action" model="ir.actions.act_window">
+      <field name="name">Imagenes</field>
+      <field name="res_model">geotermia.imagenes</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="geotermia_imagenes_action" id="geotermia_imagenes_menu" sequence="15" parent="geotermia_comunicacion"/>
+  </data>
+</openerp>

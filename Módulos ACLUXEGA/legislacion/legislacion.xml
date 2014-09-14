@@ -1,0 +1,792 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+  <data>
+    <menuitem name="Legislación" id="legislacion_menu" sequence="90"/>
+    <menuitem name="Geotermia" id="geotermia_menu" parent="legislacion_menu"/>
+    <menuitem name="Energías renovables" id="energiasrenovables_menu" parent="legislacion_menu"/>
+    <menuitem name="Varias" id="varias_menu" parent="legislacion_menu"/>
+
+    <record model="ir.ui.view" id="legislacion_galicia_tree">
+      <field name="name">legislacion.galicia.tree</field>
+      <field name="model">legislacion.galicia</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="galicia">
+          <field name="directiva"/>
+          <field name="fuente"/>
+          <field name="modificada"/>
+          <field name="derogada"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="legislacion_galicia_form">
+      <field name="name">legislacion.galicia.form</field>
+      <field name="model">legislacion.galicia</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="galicia">
+          <group>
+            <field name="directiva"/>
+            <field name="modificada"/>
+            <field name="nuevadirectiva" placeholder="Directiva que modifica o sustituye..."/>
+          </group>
+          <group>
+            <field name="derogada"/>
+            <field name="fuente"/>
+          </group>
+          <newline/>
+          <separator string="Normativa" colspan="4"/>
+          <notebook colspan="2">
+            <page string="Resumen">
+              <group colspan="2" col="1">
+                <field name="resumen"/>
+              </group>
+            </page>
+            <page string="Contenido">
+              <group colspan="2" col="1">
+                <field name="contenido"/>
+              </group>
+            </page>
+          </notebook>
+        </form>
+      </field>
+    </record>
+
+    <record id="legislacion_galicia_action" model="ir.actions.act_window">
+      <field name="name">Galicia</field>
+      <field name="res_model">legislacion.galicia</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="legislacion_galicia_action" id="legislacion_galicia_menu" sequence="1" parent="geotermia_menu"/>
+
+     <record model="ir.ui.view" id="custom_comunidad_kanban_view">
+            <field name="name">legislacion.comunidadautonoma.kanban</field>
+            <field name="model">legislacion.comunidadautonoma</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--list of field to be loaded -->
+                    <field name="comunidad" />
+                    <field name="image" />
+                    <templates>
+                    <t t-name="kanban-box">
+                            <div class="oe_product_vignette">
+                                <a type="open">
+                                    <img class="oe_kanban_image"
+                                        t-att-src="kanban_image('legislacion.comunidadautonoma', 'image', record.id.value)" />
+                                </a>
+                                <div class="oe_product_desc">
+                                    <h4>
+                                        <a type="edit">
+                                            <field name="comunidad"></field>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li><field name="directiva"></field> </li>
+                                        <li><field name="fuente"></field>  </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+    </record>
+
+    <record model="ir.ui.view" id="legislacion_comunidadautonoma_tree">
+      <field name="name">legislacion.comunidadautonoma.tree</field>
+      <field name="model">legislacion.comunidadautonoma</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="comunidadautonoma">
+          <field name="comunidad"/>
+          <field name="directiva"/>
+          <field name="fuente"/>
+          <field name="modificada"/>
+          <field name="derogada"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="legislacion_comunidadautonoma_form">
+      <field name="name">legislacion.comunidadautonoma.form</field>
+      <field name="model">legislacion.comunidadautonoma</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="comunidadautonoma">
+          <group>
+            <field name="image" widget='image' />
+            <field name="comunidad"/>
+            <field name="directiva"/>
+            <field name="modificada"/>
+            <field name="nuevadirectiva" placeholder="Directiva que modifica o sustituye..."/>
+          </group>
+          <group>
+            <field name="derogada"/>
+            <field name="fuente"/>
+          </group>
+          <newline/>
+          <separator string="Normativa" colspan="4"/>
+          <notebook colspan="2">
+            <page string="Resumen">
+              <group colspan="2" col="1">
+                <field name="resumen"/>
+              </group>
+            </page>
+            <page string="Contenido">
+              <group colspan="2" col="1">
+                <field name="contenido"/>
+              </group>
+            </page>
+          </notebook>
+        </form>
+      </field>
+    </record>
+
+    <record id="legislacion_comunidadautonoma_action" model="ir.actions.act_window">
+      <field name="name">Comunidad autonoma</field>
+      <field name="res_model">legislacion.comunidadautonoma</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem action="legislacion_comunidadautonoma_action" id="legislacion_comunidadautonoma_menu" sequence="2" parent="geotermia_menu"/>
+
+    <record model="ir.ui.view" id="legislacion_estado_tree">
+      <field name="name">legislacion.estado.tree</field>
+      <field name="model">legislacion.estado</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="estado">
+          <field name="directiva"/>
+          <field name="fuente"/>
+          <field name="modificada"/>
+          <field name="derogada"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="legislacion_estado_form">
+      <field name="name">legislacion.estado.form</field>
+      <field name="model">legislacion.estado</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="estado">
+          <group>
+            <field name="directiva"/>
+            <field name="modificada"/>
+            <field name="nuevadirectiva" placeholder="Directiva que modifica o sustituye..."/>
+          </group>
+          <group>
+            <field name="derogada"/>
+            <field name="fuente"/>
+          </group>
+          <newline/>
+          <separator string="Normativa" colspan="4"/>
+          <notebook colspan="2">
+            <page string="Resumen">
+              <group colspan="2" col="1">
+                <field name="resumen"/>
+              </group>
+            </page>
+            <page string="Contenido">
+              <group colspan="2" col="1">
+                <field name="contenido"/>
+              </group>
+            </page>
+          </notebook>
+        </form>
+      </field>
+    </record>
+
+    <record id="legislacion_estado_action" model="ir.actions.act_window">
+      <field name="name">Estado</field>
+      <field name="res_model">legislacion.estado</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="legislacion_estado_action" id="legislacion_estado_menu" sequence="3" parent="geotermia_menu"/>
+
+    <record model="ir.ui.view" id="legislacion_unioneuropea_tree">
+      <field name="name">legislacion.unioneuropea.tree</field>
+      <field name="model">legislacion.unioneuropea</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="unioneuropea">
+          <field name="directiva"/>
+          <field name="fuente"/>
+          <field name="modificada"/>
+          <field name="derogada"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="legislacion_unioneuropea_form">
+      <field name="name">legislacion.unioneuropea.form</field>
+      <field name="model">legislacion.unioneuropea</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="unioneuropea">
+          <group>
+            <field name="directiva"/>
+            <field name="modificada"/>
+            <field name="nuevadirectiva" placeholder="Directiva que modifica o sustituye..."/>
+          </group>
+          <group>
+            <field name="derogada"/>
+            <field name="fuente"/>
+          </group>
+          <newline/>
+          <separator string="Normativa" colspan="4"/>
+          <notebook colspan="2">
+            <page string="Resumen">
+              <group colspan="2" col="1">
+                <field name="resumen"/>
+              </group>
+            </page>
+            <page string="Contenido">
+              <group colspan="2" col="1">
+                <field name="contenido"/>
+              </group>
+            </page>
+          </notebook>
+        </form>
+      </field>
+    </record>
+
+    <record id="legislacion_unioneuropea_action" model="ir.actions.act_window">
+      <field name="name">Union europea</field>
+      <field name="res_model">legislacion.unioneuropea</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="legislacion_unioneuropea_action" id="legislacion_unioneuropea_menu" sequence="4" parent="geotermia_menu"/>
+
+    <record model="ir.ui.view" id="legislacion_galiciaer_tree">
+      <field name="name">legislacion.galiciaer.tree</field>
+      <field name="model">legislacion.galiciaer</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="galiciaer">
+          <field name="directiva"/>
+          <field name="fuente"/>
+          <field name="modificada"/>
+          <field name="derogada"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="legislacion_galiciaer_form">
+      <field name="name">legislacion.galiciaer.form</field>
+      <field name="model">legislacion.galiciaer</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="galiciaer">
+          <group>
+            <field name="directiva"/>
+            <field name="modificada"/>
+            <field name="nuevadirectiva" placeholder="Directiva que modifica o sustituye..."/>
+          </group>
+          <group>
+            <field name="derogada"/>
+            <field name="fuente"/>
+          </group>
+          <newline/>
+          <separator string="Normativa" colspan="4"/>
+          <notebook colspan="2">
+            <page string="Resumen">
+              <group colspan="2" col="1">
+                <field name="resumen"/>
+              </group>
+            </page>
+            <page string="Contenido">
+              <group colspan="2" col="1">
+                <field name="contenido"/>
+              </group>
+            </page>
+          </notebook>
+        </form>
+      </field>
+    </record>
+
+    <record id="legislacion_galiciaer_action" model="ir.actions.act_window">
+      <field name="name">Galicia</field>
+      <field name="res_model">legislacion.galiciaer</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="legislacion_galiciaer_action" id="legislacion_galiciaer_menu" sequence="5" parent="energiasrenovables_menu"/>
+
+    <record model="ir.ui.view" id="custom_autonoma_kanban_view">
+            <field name="name">legislacion.comunidadautonomaer.kanban</field>
+            <field name="model">legislacion.comunidadautonomaer</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--list of field to be loaded -->
+                    <field name="comunidad" />
+                    <field name="image" />
+                    <templates>
+                    <t t-name="kanban-box">
+                            <div class="oe_product_vignette">
+                                <a type="open">
+                                    <img class="oe_kanban_image"
+                                        t-att-src="kanban_image('legislacion.comunidadautonomaer', 'image', record.id.value)" />
+                                </a>
+                                <div class="oe_product_desc">
+                                    <h4>
+                                        <a type="edit">
+                                            <field name="comunidad"></field>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li><field name="directiva"></field> </li>
+                                        <li><field name="fuente"></field>  </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+    </record>
+
+    <record model="ir.ui.view" id="legislacion_comunidadautonomaer_tree">
+      <field name="name">legislacion.comunidadautonomaer.tree</field>
+      <field name="model">legislacion.comunidadautonomaer</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="comunidadautonomaer">
+          <field name="comunidad"/>
+          <field name="directiva"/>
+          <field name="fuente"/>
+          <field name="modificada"/>
+          <field name="derogada"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="legislacion_comunidadautonomaer_form">
+      <field name="name">legislacion.comunidadautonomaer.form</field>
+      <field name="model">legislacion.comunidadautonomaer</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="comunidadautonomaer">
+          <group>
+            <field name="image" widget='image' />
+            <field name="comunidad"/>
+            <field name="directiva"/>
+            <field name="modificada"/>
+            <field name="nuevadirectiva" placeholder="Directiva que modifica o sustituye..."/>
+          </group>
+          <group>
+            <field name="derogada"/>
+            <field name="fuente"/>
+          </group>
+          <newline/>
+          <separator string="Normativa" colspan="4"/>
+          <notebook colspan="2">
+            <page string="Resumen">
+              <group colspan="2" col="1">
+                <field name="resumen"/>
+              </group>
+            </page>
+            <page string="Contenido">
+              <group colspan="2" col="1">
+                <field name="contenido"/>
+              </group>
+            </page>
+          </notebook>
+        </form>
+      </field>
+    </record>
+
+    <record id="legislacion_comunidadautonomaer_action" model="ir.actions.act_window">
+      <field name="name">Comunidad autonoma</field>
+      <field name="res_model">legislacion.comunidadautonomaer</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem action="legislacion_comunidadautonomaer_action" id="legislacion_comunidadautonomaer_menu" sequence="6" parent="energiasrenovables_menu"/>
+
+    <record model="ir.ui.view" id="legislacion_estadoer_tree">
+      <field name="name">legislacion.estadoer.tree</field>
+      <field name="model">legislacion.estadoer</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="estadoer">
+          <field name="directiva"/>
+          <field name="fuente"/>
+          <field name="modificada"/>
+          <field name="derogada"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="legislacion_estadoer_form">
+      <field name="name">legislacion.estadoer.form</field>
+      <field name="model">legislacion.estadoer</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="estadoer">
+          <group>
+            <field name="directiva"/>
+            <field name="modificada"/>
+            <field name="nuevadirectiva" placeholder="Directiva que modifica o sustituye..."/>
+          </group>
+          <group>
+            <field name="derogada"/>
+            <field name="fuente"/>
+          </group>
+          <newline/>
+          <separator string="Normativa" colspan="4"/>
+          <notebook colspan="2">
+            <page string="Resumen">
+              <group colspan="2" col="1">
+                <field name="resumen"/>
+              </group>
+            </page>
+            <page string="Contenido">
+              <group colspan="2" col="1">
+                <field name="contenido"/>
+              </group>
+            </page>
+          </notebook>
+        </form>
+      </field>
+    </record>
+
+    <record id="legislacion_estadoer_action" model="ir.actions.act_window">
+      <field name="name">Estado</field>
+      <field name="res_model">legislacion.estadoer</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="legislacion_estadoer_action" id="legislacion_estadoer_menu" sequence="7" parent="energiasrenovables_menu"/>
+
+    <record model="ir.ui.view" id="legislacion_unioneuropeaer_tree">
+      <field name="name">legislacion.unioneuropeaer.tree</field>
+      <field name="model">legislacion.unioneuropeaer</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="unioneuropeaer">
+          <field name="directiva"/>
+          <field name="fuente"/>
+          <field name="modificada"/>
+          <field name="derogada"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="legislacion_unioneuropeaer_form">
+      <field name="name">legislacion.unioneuropeaer.form</field>
+      <field name="model">legislacion.unioneuropeaer</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="unioneuropeaer">
+          <group>
+            <field name="directiva"/>
+            <field name="modificada"/>
+            <field name="nuevadirectiva" placeholder="Directiva que modifica o sustituye..."/>
+          </group>
+          <group>
+            <field name="derogada"/>
+            <field name="fuente"/>
+          </group>
+          <newline/>
+          <separator string="Normativa" colspan="4"/>
+          <notebook colspan="2">
+            <page string="Resumen">
+              <group colspan="2" col="1">
+                <field name="resumen"/>
+              </group>
+            </page>
+            <page string="Contenido">
+              <group colspan="2" col="1">
+                <field name="contenido"/>
+              </group>
+            </page>
+          </notebook>
+        </form>
+      </field>
+    </record>
+
+    <record id="legislacion_unioneuropeaer_action" model="ir.actions.act_window">
+      <field name="name">Union europea</field>
+      <field name="res_model">legislacion.unioneuropeaer</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="legislacion_unioneuropeaer_action" id="legislacion_unioneuropeaer_menu" sequence="8" parent="energiasrenovables_menu"/>
+
+    <record model="ir.ui.view" id="legislacion_galiciaot_tree">
+      <field name="name">legislacion.galiciaot.tree</field>
+      <field name="model">legislacion.galiciaot</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="galiciaot">
+          <field name="directiva"/>
+          <field name="fuente"/>
+          <field name="modificada"/>
+          <field name="derogada"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="legislacion_galiciaot_form">
+      <field name="name">legislacion.galiciaot.form</field>
+      <field name="model">legislacion.galiciaot</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="galiciaot">
+          <group>
+            <field name="directiva"/>
+            <field name="modificada"/>
+            <field name="nuevadirectiva" placeholder="Directiva que modifica o sustituye..."/>
+          </group>
+          <group>
+            <field name="derogada"/>
+            <field name="fuente"/>
+          </group>
+          <newline/>
+          <separator string="Normativa" colspan="4"/>
+          <notebook colspan="2">
+            <page string="Resumen">
+              <group colspan="2" col="1">
+                <field name="resumen"/>
+              </group>
+            </page>
+            <page string="Contenido">
+              <group colspan="2" col="1">
+                <field name="contenido"/>
+              </group>
+            </page>
+          </notebook>
+        </form>
+      </field>
+    </record>
+
+    <record id="legislacion_galiciaot_action" model="ir.actions.act_window">
+      <field name="name">Galicia</field>
+      <field name="res_model">legislacion.galiciaot</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="legislacion_galiciaot_action" id="legislacion_galiciaot_menu" sequence="9" parent="varias_menu"/>
+
+    <record model="ir.ui.view" id="custom_module_kanban_view">
+            <field name="name">legislacion.comunidadautonomaot.kanban</field>
+            <field name="model">legislacion.comunidadautonomaot</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--list of field to be loaded -->
+                    <field name="comunidad" />
+                    <field name="image" />
+                    <templates>
+                    <t t-name="kanban-box">
+                            <div class="oe_product_vignette">
+                                <a type="open">
+                                    <img class="oe_kanban_image"
+                                        t-att-src="kanban_image('legislacion.comunidadautonomaot', 'image', record.id.value)" />
+                                </a>
+                                <div class="oe_product_desc">
+                                    <h4>
+                                        <a type="edit">
+                                            <field name="comunidad"></field>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li><field name="directiva"></field> </li>
+                                        <li><field name="fuente"></field>  </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+    </record>
+
+    <record model="ir.ui.view" id="legislacion_comunidadautonomaot_tree">
+      <field name="name">legislacion.comunidadautonomaot.tree</field>
+      <field name="model">legislacion.comunidadautonomaot</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="comunidadautonomaot">
+          <field name="comunidad"/>
+          <field name="directiva"/>
+          <field name="fuente"/>
+          <field name="modificada"/>
+          <field name="derogada"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="legislacion_comunidadautonomaot_form">
+      <field name="name">legislacion.comunidadautonomaot.form</field>
+      <field name="model">legislacion.comunidadautonomaot</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="comunidadautonomaot">
+          <group>
+            <field name="image" widget='image' />
+            <field name="comunidad"/>
+            <field name="directiva"/>
+            <field name="modificada"/>
+            <field name="nuevadirectiva" placeholder="Directiva que modifica o sustituye..."/>
+          </group>
+          <group>
+            <field name="derogada"/>
+            <field name="fuente"/>
+          </group>
+          <newline/>
+          <separator string="Normativa" colspan="4"/>
+          <notebook colspan="2">
+            <page string="Resumen">
+              <group colspan="2" col="1">
+                <field name="resumen"/>
+              </group>
+            </page>
+            <page string="Contenido">
+              <group colspan="2" col="1">
+                <field name="contenido"/>
+              </group>
+            </page>
+          </notebook>
+        </form>
+      </field>
+    </record>
+
+    <record id="legislacion_comunidadautonomaot_action" model="ir.actions.act_window">
+      <field name="name">Comunidad autonoma</field>
+      <field name="res_model">legislacion.comunidadautonomaot</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem action="legislacion_comunidadautonomaot_action" id="legislacion_comunidadautonomaot_menu" sequence="10" parent="varias_menu"/>
+
+    <record model="ir.ui.view" id="legislacion_estadoot_tree">
+      <field name="name">legislacion.estadoot.tree</field>
+      <field name="model">legislacion.estadoot</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="estadoot">
+          <field name="directiva"/>
+          <field name="fuente"/>
+          <field name="modificada"/>
+          <field name="derogada"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="legislacion_estadoot_form">
+      <field name="name">legislacion.estadoot.form</field>
+      <field name="model">legislacion.estadoot</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="estadoot">
+          <group>
+            <field name="directiva"/>
+            <field name="modificada"/>
+            <field name="nuevadirectiva" placeholder="Directiva que modifica o sustituye..."/>
+          </group>
+          <group>
+            <field name="derogada"/>
+            <field name="fuente"/>
+          </group>
+          <newline/>
+          <separator string="Normativa" colspan="4"/>
+          <notebook colspan="2">
+            <page string="Resumen">
+              <group colspan="2" col="1">
+                <field name="resumen"/>
+              </group>
+            </page>
+            <page string="Contenido">
+              <group colspan="2" col="1">
+                <field name="contenido"/>
+              </group>
+            </page>
+          </notebook>
+        </form>
+      </field>
+    </record>
+
+    <record id="legislacion_estadoot_action" model="ir.actions.act_window">
+      <field name="name">Estado</field>
+      <field name="res_model">legislacion.estadoot</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="legislacion_estadoot_action" id="legislacion_estadoot_menu" sequence="11" parent="varias_menu"/>
+
+    <record model="ir.ui.view" id="legislacion_unioneuropeaot_tree">
+      <field name="name">legislacion.unioneuropeaot.tree</field>
+      <field name="model">legislacion.unioneuropeaot</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="unioneuropeaot">
+          <field name="directiva"/>
+          <field name="fuente"/>
+          <field name="modificada"/>
+          <field name="derogada"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="legislacion_unioneuropeaot_form">
+      <field name="name">legislacion.unioneuropeaot.form</field>
+      <field name="model">legislacion.unioneuropeaot</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="unioneuropeaot">
+          <group>
+            <field name="directiva"/>
+            <field name="modificada"/>
+            <field name="nuevadirectiva" placeholder="Directiva que modifica o sustituye..."/>
+          </group>
+          <group>
+            <field name="derogada"/>
+            <field name="fuente"/>
+          </group>
+          <newline/>
+          <separator string="Normativa" colspan="4"/>
+          <notebook colspan="2">
+            <page string="Resumen">
+              <group colspan="2" col="1">
+                <field name="resumen"/>
+              </group>
+            </page>
+            <page string="Contenido">
+              <group colspan="2" col="1">
+                <field name="contenido"/>
+              </group>
+            </page>
+          </notebook>
+        </form>
+      </field>
+    </record>
+
+    <record id="legislacion_unioneuropeaot_action" model="ir.actions.act_window">
+      <field name="name">Union europea</field>
+      <field name="res_model">legislacion.unioneuropeaot</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="legislacion_unioneuropeaot_action" id="legislacion_unioneuropeaot_menu" sequence="12" parent="varias_menu"/>
+  </data>
+</openerp>

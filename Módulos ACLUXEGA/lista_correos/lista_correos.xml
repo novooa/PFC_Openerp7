@@ -1,0 +1,1001 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+  <data>
+    <menuitem name="Lista de correos" id="lista_correos" sequence="90"/>
+    <menuitem name="Lista general" id="lista_correos_listageneral" parent="lista_correos"/>
+    <menuitem name="Tipos de empresa" id="lista_correos_tiposempresa" parent="lista_correos" />
+    <menuitem name="Instituciones" id="lista_correos_instituciones" parent="lista_correos" />
+    <menuitem name="Medios de comunicacion" id="lista_correos_mcomunicacion" parent="lista_correos" />
+    <menuitem name="Prescriptores" id="lista_correos_prescriptores" parent="lista_correos" />
+
+    <record model="ir.ui.view" id="lista_correos_listageneral_tree">
+      <field name="name">lista_correos.listageneral.tree</field>
+      <field name="model">lista_correos.listageneral</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="listageneral">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+          <field name="actividad"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="lista_correos_listageneral_form">
+      <field name="name">lista_correos.listageneral.form</field>
+      <field name="model">lista_correos.listageneral</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="listageneral">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="lista_correos_listageneral_action" model="ir.actions.act_window">
+      <field name="name">Lista general</field>
+      <field name="res_model">lista_correos.listageneral</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="lista_correos_listageneral_action" id="lista_correos_listageneral_menu" sequence="1" parent="lista_correos_listageneral"/>
+
+    <record model="ir.ui.view" id="lista_correos_bajas_tree">
+      <field name="name">lista_correos.bajas.tree</field>
+      <field name="model">lista_correos.bajas</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="bajas">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+          <field name="actividad"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="lista_correos_bajas_form">
+      <field name="name">lista_correos.bajas.form</field>
+      <field name="model">lista_correos.bajas</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="listageneral">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="lista_correos_bajas_action" model="ir.actions.act_window">
+      <field name="name">Bajas</field>
+      <field name="res_model">lista_correos.bajas</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="lista_correos_bajas_action" id="lista_correos_bajas_menu" sequence="2" parent="lista_correos_listageneral"/>
+
+    <record model="ir.ui.view" id="lista_correos_ingenierias_tree">
+      <field name="name">lista_correos.ingenierias.tree</field>
+      <field name="model">lista_correos.ingenierias</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="ingenierias">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="lista_correos_ingenierias_form">
+      <field name="name">lista_correos.ingenierias.form</field>
+      <field name="model">lista_correos.ingenierias</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="ingenierias">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="lista_correos_ingenierias_action" model="ir.actions.act_window">
+      <field name="name">Ingenierias</field>
+      <field name="res_model">lista_correos.ingenierias</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="lista_correos_ingenierias_action" id="lista_correos_ingenierias_menu" sequence="3" parent="lista_correos_tiposempresa"/>
+
+    <record model="ir.ui.view" id="lista_correos_instaladoras_tree">
+      <field name="name">lista_correos.instaladoras.tree</field>
+      <field name="model">lista_correos.instaladoras</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="instaladoras">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="lista_correos_instaladoras_form">
+      <field name="name">lista_correos.instaladoras.form</field>
+      <field name="model">lista_correos.instaladoras</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="instaladoras">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="lista_correos_instaladoras_action" model="ir.actions.act_window">
+      <field name="name">Instaladoras</field>
+      <field name="res_model">lista_correos.instaladoras</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="lista_correos_instaladoras_action" id="lista_correos_instaladoras_menu" sequence="4" parent="lista_correos_tiposempresa"/>
+
+    <record model="ir.ui.view" id="lista_correos_sondeos_tree">
+      <field name="name">lista_correos.sondeos.tree</field>
+      <field name="model">lista_correos.sondeos</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="sondeos">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="lista_correos_sondeos_form">
+      <field name="name">lista_correos.sondeos.form</field>
+      <field name="model">lista_correos.sondeos</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="sondeos">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="lista_correos_sondeos_action" model="ir.actions.act_window">
+      <field name="name">Sondeos</field>
+      <field name="res_model">lista_correos.sondeos</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="lista_correos_sondeos_action" id="lista_correos_sondeos_menu" sequence="5" parent="lista_correos_tiposempresa"/>
+
+	    <record model="ir.ui.view" id="lista_correos_distribuidoras_tree">
+      <field name="name">lista_correos.distribuidoras.tree</field>
+      <field name="model">lista_correos.distribuidoras</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="distribuidoras">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="lista_correos_distribuidoras_form">
+      <field name="name">lista_correos.distribuidoras.form</field>
+      <field name="model">lista_correos.distribuidoras</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="distribuidoras">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="lista_correos_distribuidoras_action" model="ir.actions.act_window">
+      <field name="name">Distribuidoras</field>
+      <field name="res_model">lista_correos.distribuidoras</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="lista_correos_distribuidoras_action" id="lista_correos_distribuidoras_menu" sequence="6" parent="lista_correos_tiposempresa"/>
+
+    <record model="ir.ui.view" id="lista_correos_arquitectura_tree">
+      <field name="name">lista_correos.arquitectura.tree</field>
+      <field name="model">lista_correos.arquitectura</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="arquitectura">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="lista_correos_arquitectura_form">
+      <field name="name">lista_correos.arquitectura.form</field>
+      <field name="model">lista_correos.arquitectura</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="arquitectura">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="lista_correos_arquitectura_action" model="ir.actions.act_window">
+      <field name="name">Arquitectura</field>
+      <field name="res_model">lista_correos.arquitectura</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="lista_correos_arquitectura_action" id="lista_correos_arquitectura_menu" sequence="7" parent="lista_correos_tiposempresa"/>
+
+    <record model="ir.ui.view" id="lista_correos_sudamerica_tree">
+      <field name="name">lista_correos.sudamerica.tree</field>
+      <field name="model">lista_correos.sudamerica</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="sudamerica">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="lista_correos_sudamerica_form">
+      <field name="name">lista_correos.sudamerica.form</field>
+      <field name="model">lista_correos.sudamerica</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="sudamerica">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="lista_correos_sudamerica_action" model="ir.actions.act_window">
+      <field name="name">Sudamerica</field>
+      <field name="res_model">lista_correos.sudamerica</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="lista_correos_sudamerica_action" id="lista_correos_sudamerica_menu" sequence="8" parent="lista_correos_tiposempresa"/>
+
+    <record model="ir.ui.view" id="lista_correos_otras_tree">
+      <field name="name">lista_correos.otras.tree</field>
+      <field name="model">lista_correos.otras</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="otras">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="lista_correos_otras_form">
+      <field name="name">lista_correos.otras.form</field>
+      <field name="model">lista_correos.otras</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="otras">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="lista_correos_otras_action" model="ir.actions.act_window">
+      <field name="name">Otras</field>
+      <field name="res_model">lista_correos.otras</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="lista_correos_otras_action" id="lista_correos_otras_menu" sequence="9" parent="lista_correos_tiposempresa"/>
+
+    <record model="ir.ui.view" id="lista_correos_agenciasenergia_tree">
+      <field name="name">lista_correos.agenciasenergia.tree</field>
+      <field name="model">lista_correos.agenciasenergia</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="agenciasenergia">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="lista_correos_agenciasenergia_form">
+      <field name="name">lista_correos.agenciasenergia.form</field>
+      <field name="model">lista_correos.agenciasenergia</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="agenciasenergia">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="lista_correos_agenciasenergia_action" model="ir.actions.act_window">
+      <field name="name">Agencias de energia</field>
+      <field name="res_model">lista_correos.listageneral</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="lista_correos_agenciasenergia_action" id="lista_correos_agenciasenergia_menu" sequence="10" parent="lista_correos_instituciones"/>
+
+    <record model="ir.ui.view" id="lista_correos_asociaciones_tree">
+      <field name="name">lista_correos.asociaciones.tree</field>
+      <field name="model">lista_correos.asociaciones</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="asociaciones">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="lista_correos_asociaciones_form">
+      <field name="name">lista_correos.asociaciones.form</field>
+      <field name="model">lista_correos.asociaciones</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="asociaciones">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="lista_correos_asociaciones_action" model="ir.actions.act_window">
+      <field name="name">Asociaciones</field>
+      <field name="res_model">lista_correos.asociaciones</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="lista_correos_asociaciones_action" id="lista_correos_asociaciones_menu" sequence="11" parent="lista_correos_instituciones"/>
+
+    <record model="ir.ui.view" id="lista_correos_colegiosprofesionales_tree">
+      <field name="name">lista_correos.colegiosprofesionales.tree</field>
+      <field name="model">lista_correos.colegiosprofesionales</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="colegiosprofesionales">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="lista_correos_colegiosprofesionales_form">
+      <field name="name">lista_correos.colegiosprofesionales.form</field>
+      <field name="model">lista_correos.colegiosprofesionales</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="colegiosprofesionales">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="lista_correos_colegiosprofesionales_action" model="ir.actions.act_window">
+      <field name="name">Colegios profesionales</field>
+      <field name="res_model">lista_correos.colegiosprofesionales</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="lista_correos_colegiosprofesionales_action" id="lista_correos_colegiosprofesionales_menu" sequence="12" parent="lista_correos_instituciones"/>
+
+
+    <record model="ir.ui.view" id="lista_correos_otrosa_tree">
+      <field name="name">lista_correos.otrosa.tree</field>
+      <field name="model">lista_correos.otrosa</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="otrosa">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="lista_correos_otrosa_form">
+      <field name="name">lista_correos.otrosa.form</field>
+      <field name="model">lista_correos.otrosa</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="otrosa">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="lista_correos_otrosa_action" model="ir.actions.act_window">
+      <field name="name">Otra</field>
+      <field name="res_model">lista_correos.otrosa</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="lista_correos_otrosa_action" id="lista_correos_otrosa_menu" sequence="13" parent="lista_correos_instituciones"/>
+
+    <record model="ir.ui.view" id="lista_correos_galicia_tree">
+      <field name="name">lista_correos.galicia.tree</field>
+      <field name="model">lista_correos.galicia</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="galicia">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="lista_correos_galicia_form">
+      <field name="name">lista_correos.galicia.form</field>
+      <field name="model">lista_correos.galicia</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="galicia">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="lista_correos_galicia_action" model="ir.actions.act_window">
+      <field name="name">Galicia</field>
+      <field name="res_model">lista_correos.galicia</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="lista_correos_galicia_action" id="lista_correos_galicia_menu" sequence="14" parent="lista_correos_mcomunicacion"/>
+
+    <record model="ir.ui.view" id="lista_correos_estatal_tree">
+      <field name="name">lista_correos.estatal.tree</field>
+      <field name="model">lista_correos.estatal</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="estatal">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="lista_correos_estatal_form">
+      <field name="name">lista_correos.estatal.form</field>
+      <field name="model">lista_correos.estatal</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="estatal">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="lista_correos_estatal_action" model="ir.actions.act_window">
+      <field name="name">Estatal</field>
+      <field name="res_model">lista_correos.estatal</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="lista_correos_estatal_action" id="lista_correos_estatal_menu" sequence="15" parent="lista_correos_mcomunicacion"/>
+
+    <record model="ir.ui.view" id="lista_correos_extranjero_tree">
+      <field name="name">lista_correos.extranjero.tree</field>
+      <field name="model">lista_correos.extranjero</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="extranjero">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="lista_correos_extranjero_form">
+      <field name="name">lista_correos.extranjero.form</field>
+      <field name="model">lista_correos.extranjero</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="extranjero">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="lista_correos_extranjero_action" model="ir.actions.act_window">
+      <field name="name">Extranjero</field>
+      <field name="res_model">lista_correos.extranjero</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="lista_correos_extranjero_action" id="lista_correos_extranjero_menu" sequence="16" parent="lista_correos_mcomunicacion"/>
+
+    <record model="ir.ui.view" id="lista_correos_especializados_tree">
+      <field name="name">lista_correos.especializados.tree</field>
+      <field name="model">lista_correos.especializados</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="especializados">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="lista_correos_especializados_form">
+      <field name="name">lista_correos.especializados.form</field>
+      <field name="model">lista_correos.especializados</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="especializados">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="lista_correos_especializados_action" model="ir.actions.act_window">
+      <field name="name">Especializados</field>
+      <field name="res_model">lista_correos.especializados</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="lista_correos_especializados_action" id="lista_correos_especializados_menu" sequence="17" parent="lista_correos_mcomunicacion"/>
+
+    <record model="ir.ui.view" id="lista_correos_online_tree">
+      <field name="name">lista_correos.online.tree</field>
+      <field name="model">lista_correos.online</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="online">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="lista_correos_online_form">
+      <field name="name">lista_correos.online.form</field>
+      <field name="model">lista_correos.online</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="online">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="lista_correos_online_action" model="ir.actions.act_window">
+      <field name="name">Online</field>
+      <field name="res_model">lista_correos.online</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="lista_correos_online_action" id="lista_correos_online_menu" sequence="18" parent="lista_correos_mcomunicacion"/>
+
+    <record model="ir.ui.view" id="lista_correos_otross_tree">
+      <field name="name">lista_correos.otross.tree</field>
+      <field name="model">lista_correos.otross</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="otross">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="lista_correos_otross_form">
+      <field name="name">lista_correos.otross.form</field>
+      <field name="model">lista_correos.otross</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="otross">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="lista_correos_otross_action" model="ir.actions.act_window">
+      <field name="name">Otro</field>
+      <field name="res_model">lista_correos.otros</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="lista_correos_otross_action" id="lista_correos_otross_menu" sequence="19" parent="lista_correos_mcomunicacion"/>
+
+    <record model="ir.ui.view" id="lista_correos_personas_tree">
+      <field name="name">lista_correos.personas.tree</field>
+      <field name="model">lista_correos.personas</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="personas">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="lista_correos_personas_form">
+      <field name="name">lista_correos.personas.form</field>
+      <field name="model">lista_correos.personas</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="personas">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="lista_correos_personas_action" model="ir.actions.act_window">
+      <field name="name">Personas</field>
+      <field name="res_model">lista_correos.personas</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="lista_correos_personas_action" id="lista_correos_personas_menu" sequence="20" parent="lista_correos_prescriptores"/>
+
+    <record model="ir.ui.view" id="lista_correos_otros_tree">
+      <field name="name">lista_correos.otros.tree</field>
+      <field name="model">lista_correos.otros</field>
+      <field name="type">tree</field>      
+      <field name="arch" type="xml">
+        <tree string="otros">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="lista_correos_otros_form">
+      <field name="name">lista_correos.otros.form</field>
+      <field name="model">lista_correos.otros</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="otros">
+          <field name="email"/>
+          <field name="fuente"/>
+          <field name="empresa"/>
+          <field name="poblacion"/>
+          <field name="provincia"/>
+          <field name="telefono"/>
+          <field name="cif"/>
+          <field name="direccion"/>
+          <field name="cp"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="lista_correos_otros_action" model="ir.actions.act_window">
+      <field name="name">Otros</field>
+      <field name="res_model">lista_correos.otros</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="lista_correos_otros_action" id="lista_correos_otros_menu" sequence="21" parent="lista_correos_prescriptores"/>
+  </data>
+</openerp>
