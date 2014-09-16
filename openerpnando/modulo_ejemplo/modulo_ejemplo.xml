@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+  <data>
+    <menuitem name="Módulo ejemplo" id="moduloejemplo" sequence="90"/>
+    <menuitem name="Menú propio" id="moduloejemplo_menupropio" parent="moduloejemplo"/>
+
+    <record model="ir.ui.view" id="modulo_ejemplo_objeto_tree">
+      <field name="name">modulo_ejemplo.objeto.tree</field>
+      <field name="model">modulo_ejemplo.objeto</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="objeto">
+          <field name="cadena"/>
+          <field name="cadenados"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="modulo_ejemplo.objeto_form">
+      <field name="name">modulo_ejemplo.objeto.form</field>
+      <field name="model">modulo_ejemplo.objeto</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="objeto">
+          <field name="cadena"/>
+          <field name="cadenados"/>
+        </form>
+      </field>
+    </record>
+
+    <record id="modulo_ejemplo_objeto_action" model="ir.actions.act_window">
+      <field name="name">Objeto</field>
+      <field name="res_model">modulo_ejemplo.objeto</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="modulo_ejemplo_objeto_action" id="modulo_ejemplo_objeto_menu" sequence="1" parent="moduloejemplo_menupropio"/>
+
+  </data>
+</openerp>
