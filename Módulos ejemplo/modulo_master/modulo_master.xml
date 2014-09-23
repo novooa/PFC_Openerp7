@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+  <data>
+    <menuitem name="Módulo máster" id="modulomaster" sequence="90"/>
+    <menuitem name="Matrícula" id="modulomaster_matricula" parent="modulomaster"/>
+
+    <record model="ir.ui.view" id="custom_ficha_kanban_view">
+            <field name="name">modulo_master.ficha.kanban</field>
+            <field name="model">modulo_master.ficha</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--list of field to be loaded -->
+                    <field name="apellidosyn" />
+                    <field name="image" />
+                    <templates>
+                    <t t-name="kanban-box">
+                            <div class="oe_product_vignette">
+                                <a type="open">
+                                    <img class="oe_kanban_image"
+                                        t-att-src="kanban_image('modulo_master.ficha', 'image', record.id.value)" />
+                                </a>
+                                <div class="oe_product_desc">
+                                    <h4>
+                                        <a type="edit">
+                                            <field name="apellidosyn"></field>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li><field name="telf"></field> </li>
+                                        <li><field name="email"></field>  </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+    </record>
+
+    <record model="ir.ui.view" id="modulo_master_objeto_tree">
+      <field name="name">modulo_master.ficha.tree</field>
+      <field name="model">modulo_master.ficha</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="ficha">
+          <field name="apellidosyn"/>
+          <field name="fecha"/>
+          <field name="email"/>
+          <field name="telf"/>
+          <field name="telffijo"/>
+          <field name="direccion"/>
+          <field name="titulo"/>
+          <field name="becario"/>
+          <field name="idiomas"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="modulo_master.ficha_form">
+      <field name="name">modulo_master.ficha.form</field>
+      <field name="model">modulo_master.ficha</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="ficha">
+          <group string="Ficha del alumno">
+            <field name="image" widget='image' />
+            <field name="apellidosyn"/>
+            <field name="fecha"/>
+            <field name="email"/>
+          </group>
+          <group>
+            <field name="telf"/>
+            <field name="telffijo"/>
+            <field name="direccion"/>
+          </group>
+          <newline/>
+            <notebook colspan="3">
+              <page string="Título">
+                <group colspan="2" col="1">
+                  <field name="titulo" placeholder= "Titulo universitario..."/>
+                </group>
+              </page>
+              <page string="Becario">
+                <group colspan="2" col="1">
+                  <field name="becario" placeholder= "becario del mec...."/>
+                </group>
+              </page>
+              <page string="Idiomas">
+                <group colspan="2" col="1">
+                  <field name="idiomas" placeholder="Nivel de inglés, francés..."/>
+                </group>
+              </page>
+            </notebook>
+        </form>
+      </field>
+    </record>
+
+    <record id="modulo_master_ficha_action" model="ir.actions.act_window">
+      <field name="name">Ficha</field>
+      <field name="res_model">modulo_master.ficha</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem action="modulo_master_ficha_action" id="modulo_master_ficha_menu" sequence="1" parent="modulomaster_matricula"/>
+
+  </data>
+</openerp>
