@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+  <data>
+    <menuitem name="Módulo máster" id="modulomaster" sequence="90"/>
+    <menuitem name="Matrícula" id="modulomaster_matricula" parent="modulomaster"/>
+    <menuitem name="Empresas" id="modulomaster_empresas" parent="modulomaster"/>
+    <menuitem name="Docencia" id="modulomaster_docencia" parent="modulomaster"/>
+
+    <record model="ir.ui.view" id="custom_ficha_kanban_view">
+            <field name="name">modulo_master.ficha.kanban</field>
+            <field name="model">modulo_master.ficha</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <!--list of field to be loaded -->
+                    <field name="name" />
+                    <field name="image" />
+                    <templates>
+                    <t t-name="kanban-box">
+                            <div class="oe_product_vignette">
+                                <a type="open">
+                                    <img class="oe_kanban_image"
+                                        t-att-src="kanban_image('modulo_master.ficha', 'image', record.id.value)" />
+                                </a>
+                                <div class="oe_product_desc">
+                                    <h4>
+                                        <a type="edit">
+                                            <field name="name"></field>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li><field name="telf"></field> </li>
+                                        <li><field name="email"></field>  </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+    </record>
+
+    <record model="ir.ui.view" id="modulo_master_objeto_tree">
+      <field name="name">modulo_master.ficha.tree</field>
+      <field name="model">modulo_master.ficha</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="ficha">
+          <field name="name"/>
+          <field name="fecha"/>
+          <field name="email"/>
+          <field name="telf"/>
+          <field name="telffijo"/>
+          <field name="direccion"/>
+          <field name="titulo"/>
+          <field name="becario"/>
+          <field name="idiomas"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="modulo_master.ficha_form">
+      <field name="name">modulo_master.ficha.form</field>
+      <field name="model">modulo_master.ficha</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="ficha">
+          <group string="Ficha del alumno">
+            <field name="image" widget='image' />
+            <field name="name"/>
+            <field name="fecha"/>
+            <field name="email"/>
+          </group>
+          <group>
+            <field name="telf"/>
+            <field name="telffijo"/>
+            <field name="direccion"/>
+            <field name="empresa_id"/>
+          </group>
+          <newline/>
+            <notebook colspan="3">
+              <page string="Título">
+                <group colspan="2" col="1">
+                  <field name="titulo" placeholder= "Titulo universitario..."/>
+                </group>
+              </page>
+              <page string="Becario">
+                <group colspan="2" col="1">
+                  <field name="becario" placeholder= "becario del mec...."/>
+                </group>
+              </page>
+              <page string="Idiomas">
+                <group colspan="2" col="1">
+                  <field name="idiomas" placeholder="Nivel de inglés, francés..."/>
+                </group>
+              </page>
+            </notebook>
+        </form>
+      </field>
+    </record>
+
+    <record id="modulo_master_ficha_action" model="ir.actions.act_window">
+      <field name="name">Ficha</field>
+      <field name="res_model">modulo_master.ficha</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem action="modulo_master_ficha_action" id="modulo_master_ficha_menu" sequence="1" parent="modulomaster_matricula"/>
+
+
+
+    <record model="ir.ui.view" id="modulo_master_empresas_tree">
+      <field name="name">modulo_master.empresas.tree</field>
+      <field name="model">modulo_master.empresas</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="empresas">
+          <field name="name"/>
+          <field name="email"/>
+          <field name="telffijo"/>
+          <field name="direccion"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="modulo_master.empresas_form">
+      <field name="name">modulo_master.empresas.form</field>
+      <field name="model">modulo_master.empresas</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="empresas">
+          <group string="Empresas de prácticas">
+            <field name="name"/>
+            <field name="email"/>
+            <field name="telffijo"/>
+            <field name="direccion"/>
+          </group>
+          <newline/>
+          <group colspan="2" col="1">
+            <field name="informacion" placeholder= "Más información sobre la empresa"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="modulo_master_empresas_action" model="ir.actions.act_window">
+      <field name="name">Empresas</field>
+      <field name="res_model">modulo_master.empresas</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="modulo_master_empresas_action" id="modulo_master_empresas_menu" sequence="2" parent="modulomaster_empresas"/>
+
+    <record model="ir.ui.view" id="modulo_master_asignaturas_tree">
+      <field name="name">modulo_master.asignaturas.tree</field>
+      <field name="model">modulo_master.asignaturas</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="asignaturas">
+          <field name="nombre"/>
+          <field name="profesor"/>
+          <field name="creditos"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="modulo_master.asignaturas_form">
+      <field name="name">modulo_master.asignaturas.form</field>
+      <field name="model">modulo_master.asignaturas</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="asignaturas">
+          <group string="Asignaturas">
+            <field name="nombre"/>
+            <field name="profesor"/>
+            <field name="creditos"/>
+          </group>
+          <newline/>
+          <group colspan="2" col="1">
+            <field name="notas_ids"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="modulo_master_asignaturas_action" model="ir.actions.act_window">
+      <field name="name">Asignaturas</field>
+      <field name="res_model">modulo_master.asignaturas</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="modulo_master_asignaturas_action" id="modulo_master_asignaturas_menu" sequence="3" parent="modulomaster_docencia"/>
+
+    <record model="ir.ui.view" id="modulo_master_calificaciones_tree">
+      <field name="name">modulo_master.calificaciones.tree</field>
+      <field name="model">modulo_master.calificaciones</field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="calificaciones">
+          <field name="nombre"/>
+          <field name="nota"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="modulo_master.calificaciones_form">
+      <field name="name">modulo_master.calificaciones.form</field>
+      <field name="model">modulo_master.calificaciones</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="calificaciones">
+            <field name="nombre"/>
+            <field name="nota"/>
+        </form>
+      </field>
+    </record>
+  </data>
+</openerp>
